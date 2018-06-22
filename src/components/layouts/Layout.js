@@ -1,11 +1,27 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import actionTypes from '../../constants/actionTypes';
+import {logoutUser} from "../../actions/authActions_aj";
+import {connect} from "react-redux";
+import { withRouter } from 'react-router-dom';
 
 class Layout extends Component {
+
+    logout(){
+        this.props.dispatch(logoutUser());
+    }
+
     render() {
+        const userLoggedIn = (
+            <li>
+                 <p className="navbar-text">Logged in as : { this.props.username}</p>
+                <p className="navbar-text"><a onClick={this.logout.bind(this)}>Logout</a></p>
+            </li>
+
+        );
+        const userNotLoggedIn = (<li><Link to={'/loginselection'}><span className="glyphicon glyphicon-log-in"></span>Login</Link></li>)
         return (
             <div>
-                <div>
                     <nav className="navbar navbar-inverse">
                         <div className="container-fluid">
                             <div className="navbar-header">
@@ -23,12 +39,11 @@ class Layout extends Component {
                                     <li><Link to={'/about'}>About</Link></li>
                                 </ul>
                                 <ul className="nav navbar-nav navbar-right">
-                                    <li><a href="#"><span className="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                    {this.props.loggedIn === true ? userLoggedIn : userNotLoggedIn}
                                 </ul>
                             </div>
                         </div>
                     </nav>
-                </div>
                 <div>
                     { this.props.children }
                 </div>
@@ -42,4 +57,13 @@ class Layout extends Component {
     }
 }
 
-export default Layout;
+const mapStateToProps = state => {
+    return {
+        loggedIn: state.auth.loggedIn,
+        username: state.auth.username
+    }
+}
+
+export default withRouter(connect(mapStateToProps)(Layout));
+
+// export default Layout;
