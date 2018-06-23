@@ -5,10 +5,12 @@ import { Route, BrowserRouter } from 'react-router-dom';
 import Home from './components/layouts/Home';
 import About from './components/layouts/About';
 import Layout from './components/layouts/Layout';
-import UserManagement_aj from './components/presentation/afterLogin/UserManagement_aj';
+import UserManagement_aj from './components/presentation/afterLogin/admin/UserManagement_aj';
 import Dashboard_aj from './components/presentation/afterLogin/Dashboard_aj';
-import Register_aj from './components/presentation/afterLogin/Register_aj';
+import Register_aj from './components/presentation/afterLogin/admin/Register_aj';
 import LoginSelection_aj from './components/presentation/beforeLogin/LoginSelection_aj';
+import LiveStream_vr from './components/presentation/afterLogin/student/LiveStream_vr';
+import MainView_vm from './components/presentation/afterLogin/lecturer/MainView_vm';
 
 class App extends Component {
     render() {
@@ -20,9 +22,9 @@ class App extends Component {
                         <Route path="/loginselection" component={LoginSelection_aj} />
                         <Dashboard_aj>
                             <Route path="/loginselection/userManagement" component={UserManagement_aj} />
-                                {/*<UserManagement_aj>*/}
-                                    <Route path="/loginselection/userManagement/registerUser" component={Register_aj} />
-                                {/*</UserManagement_aj>*/}
+                            <Route path="/loginselection/userManagement/registerUser" component={Register_aj} />
+                            <Route path="/loginselection/liveStream" component={LiveStream_vr} />
+                            <Route path="/loginselection/mainView" component={MainView_vm} />
                         </Dashboard_aj>
                     </Layout>
                 </BrowserRouter>

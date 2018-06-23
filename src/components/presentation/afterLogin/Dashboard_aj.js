@@ -25,8 +25,7 @@ class Dashboard_aj extends Component {
             case 'lecturer':
                 const lecturerDasboard = (<div className="sidenav">
                     <a href="#about">Lecturer Dasboard</a>
-                    {/*<a href="#services">User Management</a>*/}
-                    {/*<a href="#clients">Attendance</a>*/}
+                    <Link to={'/loginselection/mainView'}>Main View</Link>
                     <a href="#contact">Settings</a></div>);
 
                 return lecturerDasboard;
@@ -34,7 +33,7 @@ class Dashboard_aj extends Component {
             case 'student':
                 const studentDasboard = (<div className="sidenav">
                     <a href="#about">Student Dasboard</a>
-                    {/*<a href="#services">User Management</a>*/}
+                    <Link to={'/loginselection/liveStream'}>Live Stream</Link>
                     {/*<a href="#clients">Attendance</a>*/}
                     <a href="#contact">Settings</a></div>);
 

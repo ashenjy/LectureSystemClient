@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { submitRegister, getRegsterResponseMessage } from '../../../actions/authActions_aj';
+import { submitRegister, getRegsterResponseMessage } from '../../../../actions/authActions_aj';
 import { connect } from 'react-redux';
 
 class Register_aj extends Component {
