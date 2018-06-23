@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux'
 import Login from '../presentation/beforeLogin/Login_aj';
-import Register from '../presentation/Register_aj';
+import Register from '../presentation/afterLogin/Register_aj';
 import { logoutUser } from '../../actions/authActions_aj';
 import Dashboard_aj from '../presentation/afterLogin/Dashboard_aj';
 

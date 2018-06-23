@@ -12,14 +12,18 @@ class Layout extends Component {
     }
 
     render() {
+
+        const homeLink = (<li className="active"><Link to={'/'}>Home</Link></li>);
+        const aboutLink = (<li><Link to={'/about'}>About</Link></li>);
+
         const userLoggedIn = (
             <li>
-                 <p className="navbar-text">Logged in as : { this.props.username}</p>
-                <p className="navbar-text"><a onClick={this.logout.bind(this)}>Logout</a></p>
+                 <p className="navbar-text"><span className="glyphicon glyphicon-user"></span> { this.props.username}</p>
+                <p className="navbar-text"><Link className="navbar-link" to={'/loginselection'} onClick={this.logout.bind(this)}>Logout</Link></p>
             </li>
 
         );
-        const userNotLoggedIn = (<li><Link to={'/loginselection'}><span className="glyphicon glyphicon-log-in"></span>Login</Link></li>)
+        const userNotLoggedIn = (<li><Link to={'/loginselection'}><span className="glyphicon glyphicon-log-in"></span> Login</Link></li>)
         return (
             <div>
                     <nav className="navbar navbar-inverse">
@@ -35,8 +39,8 @@ class Layout extends Component {
                             </div>
                             <div className="collapse navbar-collapse" id="myNavbar">
                                 <ul className="nav navbar-nav">
-                                    <li className="active"><Link to={'/'}>Home</Link></li>
-                                    <li><Link to={'/about'}>About</Link></li>
+                                    {this.props.loggedIn === false ? homeLink : null}
+                                    {this.props.loggedIn === false ? aboutLink : null}
                                 </ul>
                                 <ul className="nav navbar-nav navbar-right">
                                     {this.props.loggedIn === true ? userLoggedIn : userNotLoggedIn}
