@@ -26,6 +26,7 @@ class Dashboard_aj extends Component {
                 const lecturerDasboard = (<div className="sidenav">
                     <a href="#about">Lecturer Dasboard</a>
                     <Link to={'/loginselection/mainView'}>Main View</Link>
+                    <Link to={'/loginselection/lectureVideos'}>Lecture Videos</Link>
                     <a href="#contact">Settings</a></div>);
 
                 return lecturerDasboard;
