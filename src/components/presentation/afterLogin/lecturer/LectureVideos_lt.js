@@ -7,6 +7,9 @@ import { config } from "../../../../configurations/config";
 import { getAllVideos } from "../../../../services/videosService_lt";
 import { createVideoChaptersService } from "../../../../services/videosService_lt";
 
+// Import css stylesheet
+import './../../../../css/LectureVideos_lt.css';
+
 class LectureVideos_lt extends Component{
     constructor(props){
         super(props);
@@ -23,11 +26,8 @@ class LectureVideos_lt extends Component{
         getAllVideos().then(data=>{
             this.setState({
                 videoList: data
-            })
+            });
         });
-
-        console.log('config');
-        console.log(config.videoSavingPath);
     }
 
     // Function to create video chapters
@@ -52,42 +52,63 @@ class LectureVideos_lt extends Component{
 
     render() {
         return (
-            <div>
-                <table className="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <th>Subject</th>
-                        <th>Video Name</th>
-                        <th>Video</th>
-                        <th>Date Uploaded</th>
-                        <th>Action</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+            <div className="row">
+                <div className="col-3"> </div>
+
+                <div className="col-6">
+                    <table className="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Video Name</th>
+                            <th>Video</th>
+                            <th>Date Uploaded</th>
+                            <th>Action</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
                         {this.state.videoList.map(video =>
                             <tr>
                                 <td>{ video.subject }</td>
                                 <td>{ video.videoName }</td>
                                 <td>
-                                    <video controls className="form-control" id="lectureVideoPreview" width="320"
-                                           height="280">
-                                        <source src="D:/tmp/1530122414128_goldeneye.mp4"/>
-                                            Your browser does not support HTML5 video.
+                                    <video controls className="form-control" id="lectureVideoPreview">
+                                        <source src={process.env.PUBLIC_URL + '/videos/' + video.lectureVideo}/>
+                                        Your browser does not support HTML5 video.
 
                                     </video>
                                 </td>
-                                {/*<td>{ video.lectureVideo }</td>*/}
+
                                 <td>{ video.dateTime.substring(4, 24) }</td>
-                                <td>
-                                    <button type="button" className="btn btn-primary" onClick={() => this.createVideoChapters(video.lectureVideo)}>Create Chapters</button>
-                                </td>
+
+                                {/*Display different buttons depending on processed status*/}
+                                {video.status === 'unprocessed' ?
+                                    <td>
+                                        <button type="button" className="btn btn-primary"
+                                                onClick={() => this.createVideoChapters(video.lectureVideo)}>Create
+                                            Chapters
+                                        </button>
+                                    </td>
+                                    :
+                                    <td>
+                                        <button type="button" className="btn btn-success"
+                                                onClick={() => this.createVideoChapters(video.lectureVideo)}>View
+                                            Chapters
+                                        </button>
+                                    </td>
+                                }
+
                                 <td>{ video.status }</td>
                             </tr>
                         )}
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div className="col-3"> </div>
             </div>
+
         )
     }
 

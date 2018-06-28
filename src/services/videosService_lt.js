@@ -7,7 +7,10 @@ export function getAllVideos() {
 }
 
 export function createVideoChaptersService(lectureVideo) {
-    return axios.post('/api/videoChapters', {lectureVideo: lectureVideo})
+    return axios.post('/api/videoChapters', {
+        lectureVideo: lectureVideo,
+        status: 'processed'
+    })
         .then(res => res.data)
         .catch(error => error);
 }
