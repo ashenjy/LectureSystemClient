@@ -9,26 +9,10 @@ class Authentication_aj extends Component {
 
     constructor(){
         super();
-
-        this.state = {
-            toggleReg: false
-        };
     }
 
     componentDidMount(){
 
-    }
-
-    showLogin(){
-        this.setState({
-            toggleReg: false
-        });
-    }
-
-    showReg(){
-        this.setState({
-            toggleReg: true
-        });
     }
 
     logout(){
@@ -39,8 +23,7 @@ class Authentication_aj extends Component {
 
         const userNotLoggedIn = (
             <div>
-                <button onClick={this.showLogin.bind(this)}>Login</button><button onClick={this.showReg.bind(this)}>Register</button>
-                { this.state.toggleReg ? <Register /> : <Login /> }
+                { <Login /> }
             </div>
         );
         // const userLoggedIn = (<div>Logged in as: {this.props.username} <button onClick={this.logout.bind(this)}>Logout</button></div>);

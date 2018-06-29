@@ -4,8 +4,8 @@ var initialState = {
     loggedIn: localStorage.getItem('token') ? true : false,
     username: localStorage.getItem('username') ? localStorage.getItem('username') : '',
     usertype: localStorage.getItem('usertype') ? localStorage.getItem('usertype') : '',
-    getRegisterResponseMsg: ''
-
+    getRegisterResponseMsg: '',
+    getAllUsers : []
 }
 
 export default (state = initialState, action) => {
@@ -18,6 +18,7 @@ export default (state = initialState, action) => {
             updated['loggedIn'] = true;
             updated['username'] = action.username;
             updated['usertype'] = action.usertype;
+            updated['getAllUsers'] = action.getAllUsers;
 
             return updated;
 
@@ -25,6 +26,8 @@ export default (state = initialState, action) => {
             updated['loggedIn'] = true;
             updated['username'] = action.username;
             updated['usertype'] = action.usertype;
+            updated['getAllUsers'] = action.getAllUsers;
+
             return updated;
 
         case constants.USER_LOGOUT:
@@ -32,12 +35,16 @@ export default (state = initialState, action) => {
             updated['username'] = '';
             updated['usertype'] = '';
             updated['getRegisterResponseMsg'] = '';
+            updated['getAllUsers'] = '';
             return updated;
 
         case constants.GET_REGISTER_RESPONSE_MESSAGE:
             updated['getRegisterResponseMsg'] = action.getRegisterResponseMsg;
             return updated;
 
+        case constants.GET_ALL_USERS:
+            updated['getAllUsers'] = action.getAllUsers;
+            return updated;
 
         default:
             return state;
