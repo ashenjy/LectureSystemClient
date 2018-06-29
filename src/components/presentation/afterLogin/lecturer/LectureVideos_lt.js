@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 // Import configuration file
 import { config } from "../../../../configurations/config";
@@ -73,7 +74,7 @@ class LectureVideos_lt extends Component{
                                 <td>{ video.subject }</td>
                                 <td>{ video.videoName }</td>
                                 <td>
-                                    <video controls className="form-control" id="lectureVideoPreview">
+                                    <video controls width="300" height="200">
                                         <source src={process.env.PUBLIC_URL + '/videos/' + video.lectureVideo}/>
                                         Your browser does not support HTML5 video.
 
@@ -92,10 +93,8 @@ class LectureVideos_lt extends Component{
                                     </td>
                                     :
                                     <td>
-                                        <button type="button" className="btn btn-success"
-                                                onClick={() => this.createVideoChapters(video.lectureVideo)}>View
-                                            Chapters
-                                        </button>
+                                        <Link to={'/loginselection/videoChapters?lectureVideo=' + video.lectureVideo} className="btn btn-success">View
+                                            Chapters</Link>
                                     </td>
                                 }
 

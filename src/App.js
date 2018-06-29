@@ -12,6 +12,7 @@ import LoginSelection_aj from './components/presentation/beforeLogin/LoginSelect
 import LiveStream_vr from './components/presentation/afterLogin/student/LiveStream_vr';
 import MainView_vm from './components/presentation/afterLogin/lecturer/MainView_vm';
 import LectureVideos_lt from "./components/presentation/afterLogin/lecturer/LectureVideos_lt";
+import VideoChapters_lt from "./components/presentation/afterLogin/lecturer/VideoChapters_lt";
 
 class App extends Component {
     render() {
@@ -27,6 +28,8 @@ class App extends Component {
                             <Route path="/loginselection/liveStream" component={LiveStream_vr} />
                             <Route path="/loginselection/mainView" component={MainView_vm} />
                             <Route path="/loginselection/lectureVideos" component={LectureVideos_lt} />
+                            <Route path="/loginselection/videoChapters" component={VideoChapters_lt} />
+
                         </Dashboard_aj>
                     </Layout>
                 </BrowserRouter>

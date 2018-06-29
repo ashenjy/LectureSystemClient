@@ -14,3 +14,9 @@ export function createVideoChaptersService(lectureVideo) {
         .then(res => res.data)
         .catch(error => error);
 }
+
+export function getOneVideo(lectureVideo) {
+    return axios.get('/api/video?lectureVideo=' + lectureVideo)
+        .then(res => res.data)
+        .catch(error => error);
+}
