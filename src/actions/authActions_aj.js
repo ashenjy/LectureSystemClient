@@ -30,6 +30,13 @@ export function getRegsterResponseMessage(getRegisterResponseMsg){
     }
 }
 
+export function usersRetrieved(userDetails){
+    return {
+        type: actionTypes.GET_ALL_USERS,
+        getAllUsers : userDetails
+    }
+}
+
 export function submitLogin(data){
     return dispatch => {
         return fetch(`/user/${data.username}`, {
@@ -87,6 +94,24 @@ export function submitRegister(data){
                 // dispatch(userLoggedIn(data.data.username));
 
             })
+            .catch( (e) => console.log(e) );
+    }
+}
+
+
+export function getAllUsers(){
+    return dispatch => {
+        return fetch(`/user/getAllUsers`)
+            .then( (response) => {
+                if (!response.ok) {
+                    console.log("getAllUsers().Error retrieving user details");
+                    throw Error(response.statusText);
+                }
+                console.log("Successfully got user details");
+
+                return response.json();
+            })
+            .then( (data) => dispatch(usersRetrieved(data.data)))
             .catch( (e) => console.log(e) );
     }
 }
