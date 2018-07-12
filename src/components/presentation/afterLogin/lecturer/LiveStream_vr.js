@@ -13,8 +13,8 @@ class LiveStream_vr extends Component {
                     <div className="col-xs-2">
                         <h4> Logged in students</h4>
                     </div>
-
                 </div>
+
                 <div className="row">
                     <div className="col-xs-1"></div>
 
@@ -36,6 +36,19 @@ class LiveStream_vr extends Component {
                             <li className="list-group-item">Megan Fox <span className="glyphicon glyphicon-ok"></span></li>
                         </ul>
                     </div>
+                </div>
+
+                <br/>
+
+                <div className="row">
+                    <div className="col-xs-3"></div>
+                    <div className="col-xs-3">
+                        <button type="button" className="btn btn-primary">Rotate Camera</button>
+                    </div>
+                    <div className="col-xs-2">
+                        <h4> </h4>
+                    </div>
+
                 </div>
             </div>
         )
