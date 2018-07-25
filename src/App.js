@@ -9,10 +9,12 @@ import UserManagement_aj from './components/presentation/afterLogin/admin/UserMa
 import Dashboard_aj from './components/presentation/afterLogin/Dashboard_aj';
 import Register_aj from './components/presentation/afterLogin/admin/Register_aj';
 import LoginSelection_aj from './components/presentation/beforeLogin/LoginSelection_aj';
-import LiveStream_vr from './components/presentation/afterLogin/student/LiveStream_vr';
+import LiveStream_vr from './components/presentation/afterLogin/lecturer/LiveStream_vr';
 import MainView_vm from './components/presentation/afterLogin/lecturer/MainView_vm';
 import ViewUsers_aj from './components/presentation/afterLogin/admin/ViewUsers_aj';
 import FaceLogin from './components/presentation/beforeLogin/FaceRecognition/FaceLogin';
+import LectureVideos_lt from "./components/presentation/afterLogin/lecturer/LectureVideos_lt";
+import VideoChapters_lt from "./components/presentation/afterLogin/lecturer/VideoChapters_lt";
 
 class App extends Component {
     render() {
@@ -29,6 +31,9 @@ class App extends Component {
                             <Route path="/loginselection/userManagement/registerUser" component={Register_aj} />
                             <Route path="/loginselection/liveStream" component={LiveStream_vr} />
                             <Route path="/loginselection/mainView" component={MainView_vm} />
+                            <Route path="/loginselection/lectureVideos" component={LectureVideos_lt} />
+                            <Route path="/loginselection/videoChapters" component={VideoChapters_lt} />
+
                         </Dashboard_aj>
                     </Layout>
                 </BrowserRouter>
