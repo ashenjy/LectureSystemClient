@@ -6,14 +6,14 @@ class UserManagement_aj extends Component {
         return (
             <div>
                 <h3>User Management</h3>
-                {/*<ol className="breadcrumb">*/}
-                    {/*<li><a href="#">View User</a></li>*/}
-                    {/*<li><Link to={'/loginselection/userManagement/registerUser'}>Register User</Link></li>*/}
-                {/*</ol>*/}
+                <ol className="breadcrumb">
+                    <li><Link to={'/loginselection/userManagement/viewUser'}>View User</Link></li>
+                    <li><Link to={'/loginselection/userManagement/registerUser'}>Register User</Link></li>
+                </ol>
 
-                {/*<div>*/}
-                    {/*{this.props.children}*/}
-                {/*</div>*/}
+                <div>
+                    {this.props.children}
+                </div>
             </div>
         )
     }

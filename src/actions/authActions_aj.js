@@ -1,6 +1,6 @@
 import actionTypes from '../constants/actionTypes';
 
-function userLoggedIn(username, usertype){
+export function userLoggedIn(username, usertype){
     return {
         type: actionTypes.USER_REGISTERED,
         username: username,
@@ -27,6 +27,13 @@ export function getRegsterResponseMessage(getRegisterResponseMsg){
     return {
         type: actionTypes.GET_REGISTER_RESPONSE_MESSAGE,
         getRegisterResponseMsg : getRegisterResponseMsg
+    }
+}
+
+export function usersRetrieved(userDetails){
+    return {
+        type: actionTypes.GET_ALL_USERS,
+        getAllUsers : userDetails
     }
 }
 
@@ -58,7 +65,17 @@ export function submitLogin(data){
     }
 }
 
-export function submitRegister(data){
+export function submitRegister(data,files,userTypeFound){
+
+    // console.log("submitRegister().files :" + JSON.stringify(files));
+    // console.log("submitRegister().userTypeFound :" + userTypeFound);
+    if(!userTypeFound){
+        console.log("submitRegister()userTypeFound");
+        data["usertype"] = "admin";
+    }
+    data["images"] = files;
+    console.log("submitRegister().data :" + JSON.stringify(data));
+
     return dispatch => {
         return fetch('/user/', {
             method: 'POST',
@@ -87,6 +104,24 @@ export function submitRegister(data){
                 // dispatch(userLoggedIn(data.data.username));
 
             })
+            .catch( (e) => console.log(e) );
+    }
+}
+
+
+export function getAllUsers(){
+    return dispatch => {
+        return fetch(`/user/getAllUsers`)
+            .then( (response) => {
+                if (!response.ok) {
+                    console.log("getAllUsers().Error retrieving user details");
+                    throw Error(response.statusText);
+                }
+                console.log("Successfully got user details");
+
+                return response.json();
+            })
+            .then( (data) => dispatch(usersRetrieved(data.data)))
             .catch( (e) => console.log(e) );
     }
 }
