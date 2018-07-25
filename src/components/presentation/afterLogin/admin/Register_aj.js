@@ -138,7 +138,6 @@ class Register_aj extends Component {
                                 {/*<div className="help-block with-errors"></div>*/}
                             </div>
                         </div>
-<<<<<<< HEAD
                         <div className="col-md-4">
                             <div className="form-group">
                                 <label>Upload Images *</label>
@@ -157,8 +156,6 @@ class Register_aj extends Component {
                                     }
 
                         </div>
-=======
->>>>>>> f4dccc7ca155980adf454a565961b1aae120d532
                     </div>
                     <div className="row">
 

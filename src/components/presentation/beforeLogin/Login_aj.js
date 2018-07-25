@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import {getRegsterResponseMessage, submitLogin,userLoggedIn } from '../../../actions/authActions_aj';
-=======
-import {getRegsterResponseMessage, submitLogin} from '../../../actions/authActions_aj';
->>>>>>> f4dccc7ca155980adf454a565961b1aae120d532
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../../../css/loginForm_aj.css';
@@ -18,15 +14,9 @@ class Login_aj extends Component {
         this.state = {
             details:{
             },
-<<<<<<< HEAD
             // src : {
             //     imageString : ''
             // },
-=======
-            src : {
-                imageString : ''
-            },
->>>>>>> f4dccc7ca155980adf454a565961b1aae120d532
             allowWebcam : false
         };
 
@@ -36,7 +26,6 @@ class Login_aj extends Component {
     }
 
     componentDidMount(){
-<<<<<<< HEAD
         setTimeout(this.confirmBox.bind(this), 1500)
 
         // fetch('/face/user')
@@ -50,9 +39,6 @@ class Login_aj extends Component {
         //         console.log(data.toString());
         //
         //     });
-=======
-        setTimeout(this.confirmBox.bind(this), 2000)
->>>>>>> f4dccc7ca155980adf454a565961b1aae120d532
     }
 
     confirmBox(){
@@ -95,19 +81,11 @@ class Login_aj extends Component {
     capture = () => {
         const imageSrc = this.webcam.getScreenshot();
         console.log("Image src :" + imageSrc);
-<<<<<<< HEAD
         // this.setState({
         //     src :{
         //         imageString : imageSrc
         //     }
         // });
-=======
-        this.setState({
-            src :{
-                imageString : imageSrc
-            }
-        });
->>>>>>> f4dccc7ca155980adf454a565961b1aae120d532
         const base64 = {  imageString : imageSrc };
         console.log("imageString :" + base64);
         // this.showImage();
@@ -126,26 +104,19 @@ class Login_aj extends Component {
             mode: 'cors'
         }).then(response =>{
             if (!response.ok) {
-<<<<<<< HEAD
                 console.log("Client().faceRecognize().Error :" + response.statusText);
-=======
-                console.log("Client().faceRecognize().Error");
->>>>>>> f4dccc7ca155980adf454a565961b1aae120d532
                 throw Error(response.statusText);
             }
             console.log("Client().faceRecognize().Success");
             return response.json();
         })
             .then(data=>{
-<<<<<<< HEAD
                 localStorage.setItem('username', data.data.username);
                 localStorage.setItem('token', data.data.tokenID);
                 console.log("submitLogin().usertype : " + data.data.usertype);
                 localStorage.setItem('usertype', data.data.usertype);
 
                 this.props.dispatch(userLoggedIn(data.data.username, data.data.usertype));
-=======
->>>>>>> f4dccc7ca155980adf454a565961b1aae120d532
 
         })
             .catch( (e) => console.log(e) );
