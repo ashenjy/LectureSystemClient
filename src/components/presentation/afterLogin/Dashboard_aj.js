@@ -4,6 +4,7 @@ import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {Route, BrowserRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import openSocket from 'socket.io-client';
 
 
 class Dashboard_aj extends Component {
@@ -15,7 +16,7 @@ class Dashboard_aj extends Component {
 
             case 'admin':
                 const adminDashboard = (<div className="sidenav">
-                    <a href="#about">Admin Dashboard</a>
+                     <Link to={'/loginselection/adminDashboard'}>Dashboard</Link>
                     <Link to={'/loginselection/userManagement'}>User Management</Link>
                     <a href="#clients">Attendance</a>
                     <a href="#contact">Settings</a></div>);

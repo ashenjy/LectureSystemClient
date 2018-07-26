@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import './css/SideNav_aj.css';
 import { Route, BrowserRouter } from 'react-router-dom';
+import openSocket from 'socket.io-client';
+
 import Home from './components/layouts/Home';
 import About from './components/layouts/About';
 import Layout from './components/layouts/Layout';
@@ -15,8 +17,21 @@ import ViewUsers_aj from './components/presentation/afterLogin/admin/ViewUsers_a
 import FaceLogin from './components/presentation/beforeLogin/FaceRecognition/FaceLogin';
 import LectureVideos_lt from "./components/presentation/afterLogin/lecturer/LectureVideos_lt";
 import VideoChapters_lt from "./components/presentation/afterLogin/lecturer/VideoChapters_lt";
+import adminDashboard from './components/presentation/afterLogin/admin/adminDashboard';
 
 class App extends Component {
+
+    componentDidMount() {
+        const socket = openSocket('http://127.0.0.1:5000');
+        //socket.on("FromAPI", data => this.setState({ response: data }));
+        var visitorData = {
+            referringSite: window.document.referrer,
+            page: window.location.pathname
+          }
+        socket.emit('visitor-data', visitorData);
+
+    }
+    
     render() {
         return (
                 <BrowserRouter>
@@ -33,7 +48,7 @@ class App extends Component {
                             <Route path="/loginselection/mainView" component={MainView_vm} />
                             <Route path="/loginselection/lectureVideos" component={LectureVideos_lt} />
                             <Route path="/loginselection/videoChapters" component={VideoChapters_lt} />
-
+                            <Route path="/loginselection/adminDashboard" component={adminDashboard} />
                         </Dashboard_aj>
                     </Layout>
                 </BrowserRouter>
