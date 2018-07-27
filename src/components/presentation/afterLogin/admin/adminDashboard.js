@@ -4,8 +4,8 @@ import openSocket from 'socket.io-client';
 
 class adminDashboard extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             data: {
@@ -16,25 +16,31 @@ class adminDashboard extends Component {
         };
     }
 
-
+    socket = openSocket('http://127.0.0.1:5000');
     componentDidMount() {
-        const socket = openSocket('http://127.0.0.1:5000');
-
+        // const socket = openSocket('http://127.0.0.1:5000');
         // setInterval(() => {
-            socket.on('updated-stats', function (data) {
-                this.setState({
-                    data: {
-                        pages: data.pages,
-                        referrers: data.referrers,
-                        activeUsers: data.activeUsers
-                    }
-                });
+        this.socket.on('updated-stats', function (data) {
+            this.setState({
+                data: {
+                    pages: data.pages,
+                    referrers: data.referrers,
+                    activeUsers: data.activeUsers
+                }
+            });
 
-            }.bind(this));
+        }.bind(this));
+
+
         // }, 3000);
 
         // console.log("data.pages :" + JSON.stringify(this.state.data.pages));
         // console.log("data.referrers :" + JSON.stringify(this.state.data.referrers));
+    }
+
+    componentWillUnmount() {
+
+        this.socket = {};
     }
 
     render() {
@@ -59,7 +65,7 @@ class adminDashboard extends Component {
                                 </thead>
                                 <tbody>
 
-                                    {Object.keys(this.state.data.pages).map((key,i) =>
+                                    {Object.keys(this.state.data.pages).map((key, i) =>
                                         <tr key={i}>
                                             <td>{key}</td>
                                             <td>{this.state.data.pages[key]}</td>
@@ -80,7 +86,7 @@ class adminDashboard extends Component {
                                 </thead>
                                 <tbody>
 
-                                    {Object.keys(this.state.data.referrers).map((key,i) =>
+                                    {Object.keys(this.state.data.referrers).map((key, i) =>
                                         <tr key={i}>
                                             <td>{key}</td>
                                             <td>{this.state.data.referrers[key]}</td>
