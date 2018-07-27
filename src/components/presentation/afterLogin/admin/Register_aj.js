@@ -1,6 +1,11 @@
 import React, { Component} from 'react';
 import { submitRegister, getRegsterResponseMessage } from '../../../../actions/authActions_aj';
 import { connect } from 'react-redux';
+import Dropzone from 'react-dropzone'
+import { Button,Icon} from 'semantic-ui-react'
+import 'semantic-ui-css/semantic.min.css'
+import FileUpload from './fileUpload'
+import '../../../../css/register.css';
 
 class Register_aj extends Component {
 
@@ -9,11 +14,26 @@ class Register_aj extends Component {
 
         this.state = {
             details:{
-            }
+            },
+            files: []
         };
+
+        // this.sendFiles.bind(this);
+    }
+
+    onDrop(files) {
+
+        this.setState({
+            files
+        });
+        console.log("files :" + JSON.stringify(files));
+        // const filess = { id,1, files : files};
+        // console.log(this.state.files);
+        // this.updateDetails(filess)
     }
 
     componentDidMount(){
+
         this.props.dispatch(getRegsterResponseMessage(''));
     }
 
@@ -27,13 +47,44 @@ class Register_aj extends Component {
     }
 
     register(){
-        this.props.dispatch(submitRegister(this.state.details));
+        const imageNames = [];
+        let userTypeFound = false;
+
+        this.state.files.map(f =>
+            //console.log("inside map() :" + JSON.stringify(f))
+            imageNames.push(f.name)
+
+        );
+        console.log(" imageNames :" + imageNames);
+
+        if (this.state.details.hasOwnProperty("usertype")) {
+            userTypeFound = true;
+        }
+        this.props.dispatch(submitRegister(this.state.details,imageNames,userTypeFound));
     }
+
+    // sendFiles() {
+    //     console.log("sendFiles() ----------");
+    //
+    //     fetch('/multipleImages').then(response =>{
+    //         if (!response.ok) {
+    //             console.log("Client().fetchImages().Error");
+    //             throw Error(response.statusText);
+    //         }
+    //         console.log("Client().fetchImages().Success");
+    //         return response.json();
+    //     })
+    //         .then(data=>{
+    //
+    //         })
+    //         .catch( (e) => console.log(e) );
+    // }
 
     render(){
 
         const successMsg = (<div className="alert alert-success" role="alert">Successfully Registered..</div>);
         const errorMsg = (<div className="alert alert-danger" role="alert">General Application Error</div>);
+
 
         return (
             <div>
@@ -86,6 +137,24 @@ class Register_aj extends Component {
                                 </select>
                                 {/*<div className="help-block with-errors"></div>*/}
                             </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div className="form-group">
+                                <label>Upload Images *</label>
+                            </div>
+                            <div className="col-md-2">
+                                <Dropzone className="ignore" onDrop={this.onDrop.bind(this)}>
+                                    <Button icon>
+                                        <Icon name="plus" />
+                                    </Button>
+                                </Dropzone>
+                            </div>
+
+                                    {
+                                        this.state.files.map(f => <img className="register" ref="image" width={100}
+                                                                       height={100} key={f.name} src={f.preview}/>)
+                                    }
+
                         </div>
                     </div>
                     <div className="row">

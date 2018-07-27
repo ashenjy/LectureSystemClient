@@ -1,6 +1,6 @@
 import actionTypes from '../constants/actionTypes';
 
-function userLoggedIn(username, usertype){
+export function userLoggedIn(username, usertype){
     return {
         type: actionTypes.USER_REGISTERED,
         username: username,
@@ -65,7 +65,17 @@ export function submitLogin(data){
     }
 }
 
-export function submitRegister(data){
+export function submitRegister(data,files,userTypeFound){
+
+    // console.log("submitRegister().files :" + JSON.stringify(files));
+    // console.log("submitRegister().userTypeFound :" + userTypeFound);
+    if(!userTypeFound){
+        console.log("submitRegister()userTypeFound");
+        data["usertype"] = "admin";
+    }
+    data["images"] = files;
+    console.log("submitRegister().data :" + JSON.stringify(data));
+
     return dispatch => {
         return fetch('/user/', {
             method: 'POST',

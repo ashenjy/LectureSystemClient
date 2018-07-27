@@ -26,6 +26,8 @@ class ViewUsers_aj extends Component {
     }
 
     renderUsers() {
+
+        // const allImagesPath = "../../../../../../allImages/";
         return this.state.users.map((users,index) => {
             return (
                 <tr key={users._id}>
@@ -34,6 +36,9 @@ class ViewUsers_aj extends Component {
                     <td>{users.password}</td>
                     <td>{users.usertype}</td>
                     <td>{users.created}</td>
+                    <td>{users.images.map((f , index) => <img className="register" width={50}
+                                                         height={50} key={index} src={"/"+f}/>
+                    )}</td>
                 </tr>
             );
         })
@@ -52,6 +57,7 @@ class ViewUsers_aj extends Component {
                         <th>Password</th>
                         <th>User Type</th>
                         <th>Created Date</th>
+                        <th>Images</th>
                     </tr>
                     </thead>
                     <tbody>

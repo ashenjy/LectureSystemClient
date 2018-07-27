@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {getRegsterResponseMessage, submitLogin} from '../../../actions/authActions_aj';
+import {getRegsterResponseMessage, submitLogin,userLoggedIn } from '../../../actions/authActions_aj';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../../../css/loginForm_aj.css';
@@ -14,9 +14,9 @@ class Login_aj extends Component {
         this.state = {
             details:{
             },
-            src : {
-                imageString : ''
-            },
+            // src : {
+            //     imageString : ''
+            // },
             allowWebcam : false
         };
 
@@ -26,7 +26,19 @@ class Login_aj extends Component {
     }
 
     componentDidMount(){
-        setTimeout(this.confirmBox.bind(this), 2000)
+        setTimeout(this.confirmBox.bind(this), 1500)
+
+        // fetch('/face/user')
+        //     .then(response =>{
+        //         return response.json();
+        //     })
+        //     .then(data=>{
+        //         // this.setState({
+        //         //     users: users.data.result
+        //         // });
+        //         console.log(data.toString());
+        //
+        //     });
     }
 
     confirmBox(){
@@ -69,11 +81,11 @@ class Login_aj extends Component {
     capture = () => {
         const imageSrc = this.webcam.getScreenshot();
         console.log("Image src :" + imageSrc);
-        this.setState({
-            src :{
-                imageString : imageSrc
-            }
-        });
+        // this.setState({
+        //     src :{
+        //         imageString : imageSrc
+        //     }
+        // });
         const base64 = {  imageString : imageSrc };
         console.log("imageString :" + base64);
         // this.showImage();
@@ -92,13 +104,19 @@ class Login_aj extends Component {
             mode: 'cors'
         }).then(response =>{
             if (!response.ok) {
-                console.log("Client().faceRecognize().Error");
+                console.log("Client().faceRecognize().Error :" + response.statusText);
                 throw Error(response.statusText);
             }
             console.log("Client().faceRecognize().Success");
             return response.json();
         })
             .then(data=>{
+                localStorage.setItem('username', data.data.username);
+                localStorage.setItem('token', data.data.tokenID);
+                console.log("submitLogin().usertype : " + data.data.usertype);
+                localStorage.setItem('usertype', data.data.usertype);
+
+                this.props.dispatch(userLoggedIn(data.data.username, data.data.usertype));
 
         })
             .catch( (e) => console.log(e) );
