@@ -127,10 +127,27 @@ export function getAllUsers(){
 }
 
 export function logoutUser() {
+
     return dispatch => {
-        localStorage.removeItem('username');
-        localStorage.removeItem('token');
-        localStorage.removeItem('usertype');
-        dispatch(logout());
+        return fetch(`/user/logout`)
+            .then((response) => {
+                if (!response.ok) {
+                    console.log("Logout().Error");
+                    throw Error(response.statusText);
+                }
+                console.log("Successfull Logout!");
+                localStorage.removeItem('username');
+                localStorage.removeItem('token');
+                localStorage.removeItem('usertype');
+                dispatch(logout());
+                return response.json();
+            })
+            .catch((e) => console.log(e));
     }
+    // return dispatch => {
+    //     localStorage.removeItem('username');
+    //     localStorage.removeItem('token');
+    //     localStorage.removeItem('usertype');
+    //     dispatch(logout());
+    // }
 }

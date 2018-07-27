@@ -29,35 +29,36 @@ class App extends Component {
         var visitorData = {
             referringSite: window.document.referrer,
             page: window.location.pathname
-          }
+        }
         this.socket.emit('visitor-data', visitorData);
 
     }
 
-    componentWillUnmount(){
-    this.socket = {};
+    componentWillUnmount() {
+        this.socket = {};
     }
-    
+
     render() {
         return (
-                <BrowserRouter>
-                    <Layout>
-                        <Route exact path="/" component={Home} />
-                        <Route path="/about" component={About} />
-                        <Route path="/loginselection" component={LoginSelection_aj} />
-                        <Route path="/faceLogin" component={FaceLogin} />
-                        <Dashboard_aj >
-                            <Route path="/loginselection/userManagement" component={UserManagement_aj} />
-                            <Route path="/loginselection/userManagement/viewUser" component={ViewUsers_aj} />
-                            <Route path="/loginselection/userManagement/registerUser" component={Register_aj} />
-                            <Route path="/loginselection/liveStream" component={LiveStream_vr} />
-                            <Route path="/loginselection/mainView" component={MainView_vm} />
-                            <Route path="/loginselection/lectureVideos" component={LectureVideos_lt} />
-                            <Route path="/loginselection/videoChapters" component={VideoChapters_lt} />
-                            <Route path="/loginselection/adminDashboard" component={adminDashboard} />
-                        </Dashboard_aj>
-                    </Layout>
-                </BrowserRouter>
+            <BrowserRouter>
+                <Layout>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/about" component={About} />
+                    <Route path="/loginselection" component={LoginSelection_aj} />
+                    <Route path="/faceLogin" component={FaceLogin} />
+                    <Dashboard_aj >
+                        <Route exact path="/loginselection/dash" component={Dashboard_aj} />
+                        <Route path="/loginselection/dash/userManagement" component={UserManagement_aj} />
+                        <Route path="/loginselection/dash/userManagement/viewUser" component={ViewUsers_aj} />
+                        <Route path="/loginselection/dash/userManagement/registerUser" component={Register_aj} />
+                        <Route path="/loginselection/dash/liveStream" component={LiveStream_vr} />
+                        <Route path="/loginselection/dash/mainView" component={MainView_vm} />
+                        <Route path="/loginselection/dash/lectureVideos" component={LectureVideos_lt} />
+                        <Route path="/loginselection/dash/videoChapters" component={VideoChapters_lt} />
+                        <Route path="/loginselection/dash/adminDashboard" component={adminDashboard} />
+                    </Dashboard_aj>
+                </Layout>
+            </BrowserRouter>
         );
     }
 }
