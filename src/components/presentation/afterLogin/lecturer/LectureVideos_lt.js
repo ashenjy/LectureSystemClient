@@ -49,6 +49,7 @@ class LectureVideos_lt extends Component{
                 alert("Failed");
             }
         })
+
     }
 
     render() {

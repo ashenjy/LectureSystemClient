@@ -55,11 +55,11 @@ class VideoChapters_lt extends Component{
                                 <tr>
                                     <td>
                                         <video controls width="300" height="200">
-                                            <source src={process.env.PUBLIC_URL + '/videos/' + chapter}/>
+                                            <source src={process.env.PUBLIC_URL + '/videos/' + chapter.videoChapterVideo}/>
                                             Your browser does not support HTML5 video.
                                         </video>
                                     </td>
-                                    <td>  </td>
+                                    <td> { chapter.videoChapterText } </td>
                                 </tr>
                             )}
                             </tbody>
