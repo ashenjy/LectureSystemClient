@@ -21,15 +21,21 @@ import adminDashboard from './components/presentation/afterLogin/admin/adminDash
 
 class App extends Component {
 
+    socket = openSocket('http://127.0.0.1:5000');
     componentDidMount() {
-        const socket = openSocket('http://127.0.0.1:5000');
+        // const socket = openSocket('http://127.0.0.1:5000');
+
         //socket.on("FromAPI", data => this.setState({ response: data }));
         var visitorData = {
             referringSite: window.document.referrer,
             page: window.location.pathname
           }
-        socket.emit('visitor-data', visitorData);
+        this.socket.emit('visitor-data', visitorData);
 
+    }
+
+    componentWillUnmount(){
+    this.socket = {};
     }
     
     render() {
@@ -40,7 +46,7 @@ class App extends Component {
                         <Route path="/about" component={About} />
                         <Route path="/loginselection" component={LoginSelection_aj} />
                         <Route path="/faceLogin" component={FaceLogin} />
-                        <Dashboard_aj>
+                        <Dashboard_aj >
                             <Route path="/loginselection/userManagement" component={UserManagement_aj} />
                             <Route path="/loginselection/userManagement/viewUser" component={ViewUsers_aj} />
                             <Route path="/loginselection/userManagement/registerUser" component={Register_aj} />

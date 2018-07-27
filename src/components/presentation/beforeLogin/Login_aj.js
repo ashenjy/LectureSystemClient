@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
-import {getRegsterResponseMessage, submitLogin,userLoggedIn } from '../../../actions/authActions_aj';
+import { getRegsterResponseMessage, submitLogin, userLoggedIn } from '../../../actions/authActions_aj';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../../../css/loginForm_aj.css';
 import avatar from '../../../css/images/avatar.png';
 import Webcam from 'react-webcam';
+import { isNull } from 'util';
 
 class Login_aj extends Component {
 
-    constructor(){
+    constructor() {
         super();
 
         this.state = {
-            details:{
+            faceLoginError: false,
+            details: {
             },
             // src : {
             //     imageString : ''
             // },
-            allowWebcam : false
+            allowWebcam: false
         };
 
         this.confirmBox.bind(this);
@@ -25,7 +27,7 @@ class Login_aj extends Component {
         this.faceRecognize.bind(this);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         setTimeout(this.confirmBox.bind(this), 1500)
 
         // fetch('/face/user')
@@ -41,16 +43,16 @@ class Login_aj extends Component {
         //     });
     }
 
-    confirmBox(){
+    confirmBox() {
         if (window.confirm("Allow Webcam?")) {
             this.setState({
-                allowWebcam : true
+                allowWebcam: true
             });
             console.log("this.state.allowWebcam" + this.state.allowWebcam)
         }
     }
 
-    updateDetails(event){
+    updateDetails(event) {
         let updateDetails = Object.assign({}, this.state.details);
 
         updateDetails[event.target.id] = event.target.value;
@@ -59,7 +61,7 @@ class Login_aj extends Component {
         });
     }
 
-    login(){
+    login() {
         this.props.dispatch(submitLogin(this.state.details));
     }
 
@@ -79,22 +81,26 @@ class Login_aj extends Component {
     };
 
     capture = () => {
-        const imageSrc = this.webcam.getScreenshot();
-        console.log("Image src :" + imageSrc);
-        // this.setState({
-        //     src :{
-        //         imageString : imageSrc
-        //     }
-        // });
-        const base64 = {  imageString : imageSrc };
-        console.log("imageString :" + base64);
-        // this.showImage();
-        this.faceRecognize(base64);
+        let imageSrc = this.webcam.getScreenshot();
+        if (imageSrc != isNull) {
+            console.log("Image src :" + imageSrc);
+            // this.setState({
+            //     src :{
+            //         imageString : imageSrc
+            //     }
+            // });
+            let base64 = { imageString: imageSrc };
+            console.log("imageString :" + base64);
+            // this.showImage();
+            this.faceRecognize(base64);
+        } else {
+            console.log("Please try again!");
+        }
 
     };
 
     faceRecognize(base64) {
-        fetch('/user/faceLogin',{
+        fetch('/user/faceLogin', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -102,15 +108,18 @@ class Login_aj extends Component {
             },
             body: JSON.stringify(base64),
             mode: 'cors'
-        }).then(response =>{
+        }).then(response => {
             if (!response.ok) {
                 console.log("Client().faceRecognize().Error :" + response.statusText);
+                this.setState({
+                    faceLoginError: true
+                });
                 throw Error(response.statusText);
             }
             console.log("Client().faceRecognize().Success");
             return response.json();
         })
-            .then(data=>{
+            .then(data => {
                 localStorage.setItem('username', data.data.username);
                 localStorage.setItem('token', data.data.tokenID);
                 console.log("submitLogin().usertype : " + data.data.usertype);
@@ -118,12 +127,13 @@ class Login_aj extends Component {
 
                 this.props.dispatch(userLoggedIn(data.data.username, data.data.usertype));
 
-        })
-            .catch( (e) => console.log(e) );
+            })
+            .catch((e) => console.log(e));
     }
 
 
-    render(){
+    render() {
+        const faceAlert = (<div className="alert alert-danger" role="alert">Face not recognized! Please try again!</div>);
         const webcamCode = (
             <div className="webcam">
                 <Webcam
@@ -133,8 +143,12 @@ class Login_aj extends Component {
                     screenshotFormat="image/jpeg"
                     width={400}
                 />
+                
                 <button onClick={this.capture}
-                        className="btn btn-primary btn-lg btn-block">Face Login</button>
+                    className="btn btn-primary btn-lg btn-block">Face Login</button>
+
+                {this.state.faceLoginError === true ? faceAlert : null}
+
             </div>
         );
 
@@ -144,11 +158,11 @@ class Login_aj extends Component {
                 {/*<Link to={'/faceLogin'}>Face Login</Link>*/}
 
                 <div className="col-md-4">
-                    {this.state.allowWebcam === true ? webcamCode : null }
+                    {this.state.allowWebcam === true ? webcamCode : null}
                 </div>
                 {/*<div className="row">>*/}
-                    {/*<canvas ref="canvas" width={640} height={425} />*/}
-                    {/*<img ref="image" src={this.state.src.imageString} className="hidden" />*/}
+                {/*<canvas ref="canvas" width={640} height={425} />*/}
+                {/*<img ref="image" src={this.state.src.imageString} className="hidden" />*/}
                 {/*</div>*/}
 
                 {/*<h3>Login</h3>*/}
@@ -156,32 +170,32 @@ class Login_aj extends Component {
                 {/*Password <input onChange={this.updateDetails.bind(this)} id="password" type="password" placeholder= "Password"/><br/>*/}
                 {/*<button onClick={this.login.bind(this)}>Login</button>*/}
                 <div className="col-md-4">
-                <div className="login-form">
-                    <div className="form">
-                        <div className="avatar">
-                            <img src={avatar} alt="Avatar"/>
-                        </div>
-                        <h2 className="text-center">Login</h2>
-                        <div className="form-group">
-                            <input type="text" onChange={this.updateDetails.bind(this)}
-                                   className="form-control" id="username" placeholder="Username"
-                                   required="required"/>
-                        </div>
-                        <div className="form-group">
-                            <input type="password" onChange={this.updateDetails.bind(this)}
-                                   className="form-control" id="password" placeholder="Password"
-                                   required="required"/>
-                        </div>
-                        <div className="form-group">
-                            <button onClick={this.login.bind(this)}
+                    <div className="login-form">
+                        <div className="form">
+                            <div className="avatar">
+                                <img src={avatar} alt="Avatar" />
+                            </div>
+                            <h2 className="text-center">Login</h2>
+                            <div className="form-group">
+                                <input type="text" onChange={this.updateDetails.bind(this)}
+                                    className="form-control" id="username" placeholder="Username"
+                                    required="required" />
+                            </div>
+                            <div className="form-group">
+                                <input type="password" onChange={this.updateDetails.bind(this)}
+                                    className="form-control" id="password" placeholder="Password"
+                                    required="required" />
+                            </div>
+                            <div className="form-group">
+                                <button onClick={this.login.bind(this)}
                                     className="btn btn-primary btn-lg btn-block">Sign in</button>
-                        </div>
-                        <div className="clearfix">
-                            <label className="pull-left checkbox-inline"><input type="checkbox"/> Remember me</label>
-                            <a href="#" className="pull-right">Forgot Password?</a>
+                            </div>
+                            <div className="clearfix">
+                                <label className="pull-left checkbox-inline"><input type="checkbox" /> Remember me</label>
+                                <a href="#" className="pull-right">Forgot Password?</a>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
 
             </div>
