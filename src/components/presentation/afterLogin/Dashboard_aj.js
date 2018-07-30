@@ -17,7 +17,7 @@ class Dashboard_aj extends Component {
             case 'admin':
                 const adminDashboard = (<div className="sidenav">
                      <Link to={'/loginselection/adminDashboard'}>Dashboard</Link>
-                    <Link to={'/loginselection/userManagement'}>User Management</Link>
+                    <Link to={'/loginselection/userManagement/viewUser'}>User Management</Link>
                     <a href="#clients">Attendance</a>
                     <a href="#contact">Settings</a></div>);
 

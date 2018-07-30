@@ -18,7 +18,7 @@ class Layout extends Component {
 
         const userLoggedIn = (
             <li>
-                 <p className="navbar-text"><span className="glyphicon glyphicon-user"></span> { this.props.username}</p>
+                 <p className="navbar-text" style={{margin:'15px 0px 0px'}}><span className="glyphicon glyphicon-user"></span> { this.props.username}</p>
                 <p className="navbar-text"><Link className="navbar-link" to={'/loginselection'} onClick={this.logout.bind(this)}>Logout</Link></p>
             </li>
 
