@@ -1,8 +1,31 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 
 class LiveStream_vr extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            redirect:false
+        };
+
+    }
+
+    componentWillMount() {
+        if (localStorage.getItem("userid")) {
+
+        }
+        else {
+            this.setState({ redirect: true });
+        }
+    }
+
     render() {
+
+        if(this.state.redirect){
+            return(<Redirect to={'/loginselection'}/>)
+        }
+
         return (
             <div>
                 <div className="row">

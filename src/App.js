@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import './css/SideNav_aj.css';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import openSocket from 'socket.io-client';
 
 import Home from './components/layouts/Home';
@@ -29,35 +29,36 @@ class App extends Component {
         var visitorData = {
             referringSite: window.document.referrer,
             page: window.location.pathname
-          }
+        }
         this.socket.emit('visitor-data', visitorData);
 
     }
 
-    componentWillUnmount(){
-    this.socket = {};
+    componentWillUnmount() {
+        this.socket = {};
     }
-    
+
     render() {
         return (
-                <BrowserRouter>
-                    <Layout>
-                        <Route exact path="/" component={Home} />
-                        <Route path="/about" component={About} />
-                        <Route path="/loginselection" component={LoginSelection_aj} />
-                        <Route path="/faceLogin" component={FaceLogin} />
-                        <Dashboard_aj >
-                            <Route path="/loginselection/userManagement" component={UserManagement_aj} />
-                            <Route path="/loginselection/userManagement/viewUser" component={ViewUsers_aj} />
-                            <Route path="/loginselection/userManagement/registerUser" component={Register_aj} />
-                            <Route path="/loginselection/liveStream" component={LiveStream_vr} />
-                            <Route path="/loginselection/mainView" component={MainView_vm} />
-                            <Route path="/loginselection/lectureVideos" component={LectureVideos_lt} />
-                            <Route path="/loginselection/videoChapters" component={VideoChapters_lt} />
-                            <Route path="/loginselection/adminDashboard" component={adminDashboard} />
-                        </Dashboard_aj>
-                    </Layout>
-                </BrowserRouter>
+            <BrowserRouter>
+            <Layout>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/about" component={About} />
+                    <Route path="/loginselection" component={LoginSelection_aj} />
+                    <Dashboard_aj>
+                    <Route path="/userManagement/:userid" component={UserManagement_aj} />
+                    <Route path="/userManagement/viewUser/:userid" component={ViewUsers_aj} />
+                    <Route path="/userManagement/registerUser/:userid" component={Register_aj} />
+                    <Route path="/liveStream/:userid" component={LiveStream_vr} />
+                    <Route path="/mainView/:userid" component={MainView_vm} />
+                    <Route path="/lectureVideos/:userid" component={LectureVideos_lt} />
+                    <Route path="/videoChapters/:userid" component={VideoChapters_lt} />
+                    <Route path="/adminDashboard/:userid" component={adminDashboard} />
+                    </Dashboard_aj>
+                </Switch>
+            </Layout>
+            </BrowserRouter>
         );
     }
 }

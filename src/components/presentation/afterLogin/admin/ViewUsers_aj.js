@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import { usersRetrieved } from "../../../../actions/authActions_aj";
 import { connect } from "react-redux";
 import { getAllUsers } from '../../../../actions/authActions_aj';
+import {Redirect} from 'react-router-dom';
 
 class ViewUsers_aj extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            redirect:false,
             users: []
         };
     }
@@ -25,7 +27,18 @@ class ViewUsers_aj extends Component {
             });
     }
 
+
+    componentWillMount() {
+        if (localStorage.getItem("userid")) {
+
+        }
+        else {
+            this.setState({ redirect: true });
+        }
+    }
+
     renderUsers() {
+
 
         const noImages = (<td style={{ color: 'red' }}>No Images</td>);
 
@@ -49,6 +62,10 @@ class ViewUsers_aj extends Component {
 
     render() {
 
+        if(this.state.redirect){
+            return(<Redirect to={'/loginselection'}/>)
+        }
+        
         return (
             <div>
 
