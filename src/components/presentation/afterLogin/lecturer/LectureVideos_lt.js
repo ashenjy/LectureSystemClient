@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 // Import configuration file
 import { config } from "../../../../configurations/config";
@@ -17,6 +18,7 @@ class LectureVideos_lt extends Component{
 
         // Initially the list is empty
         this.state = {
+            redirect:false,
             videoList : []
         };
 
@@ -52,7 +54,21 @@ class LectureVideos_lt extends Component{
 
     }
 
+    componentWillMount() {
+        if (localStorage.getItem("userid")) {
+
+        }
+        else {
+            this.setState({ redirect: true });
+        }
+    }
+    
     render() {
+
+        if(this.state.redirect){
+            return(<Redirect to={'/loginselection'}/>)
+        }
+
         return (
             <div className="row">
                 <div className="col-3"> </div>

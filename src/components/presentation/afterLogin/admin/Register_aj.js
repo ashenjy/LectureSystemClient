@@ -6,6 +6,7 @@ import { Button,Icon} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import FileUpload from './fileUpload'
 import '../../../../css/register.css';
+import {Redirect} from 'react-router-dom';
 
 class Register_aj extends Component {
 
@@ -15,7 +16,8 @@ class Register_aj extends Component {
         this.state = {
             details:{
             },
-            files: []
+            files: [],
+            redirect:false
         };
 
         // this.sendFiles.bind(this);
@@ -30,11 +32,6 @@ class Register_aj extends Component {
         // const filess = { id,1, files : files};
         // console.log(this.state.files);
         // this.updateDetails(filess)
-    }
-
-    componentDidMount(){
-
-        this.props.dispatch(getRegsterResponseMessage(''));
     }
 
     updateDetails(event){
@@ -80,7 +77,21 @@ class Register_aj extends Component {
     //         .catch( (e) => console.log(e) );
     // }
 
-    render(){
+    componentWillMount() {
+        this.props.dispatch(getRegsterResponseMessage(''));
+        if (localStorage.getItem("userid")) {
+
+        }
+        else {
+            this.setState({ redirect: true });
+        }
+    }
+
+    render() {
+
+        if(this.state.redirect){
+            return(<Redirect to={'/loginselection'}/>)
+        }
 
         const successMsg = (<div className="alert alert-success" role="alert">Successfully Registered..</div>);
         const errorMsg = (<div className="alert alert-danger" role="alert">General Application Error</div>);

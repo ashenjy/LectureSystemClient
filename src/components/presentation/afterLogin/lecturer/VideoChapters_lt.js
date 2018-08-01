@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
+import {Redirect} from 'react-router-dom';
 
 // Import functions from service
 import { getOneVideo } from "../../../../services/videosService_lt";
@@ -10,8 +11,8 @@ class VideoChapters_lt extends Component{
 
         // Initially the list is empty
         this.state = {
+            redirect:false,
             videoList : []
-
         };
 
     }
@@ -31,7 +32,20 @@ class VideoChapters_lt extends Component{
         });
     }
 
+    componentWillMount() {
+        if (localStorage.getItem("userid")) {
+
+        }
+        else {
+            this.setState({ redirect: true });
+        }
+    }
+    
     render() {
+        if(this.state.redirect){
+            return(<Redirect to={'/loginselection'}/>)
+        }
+
         return (
             <div className="row">
                 {this.state.videoList.map(video =>

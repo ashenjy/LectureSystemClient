@@ -58,6 +58,7 @@ export function submitLogin(data){
                 localStorage.setItem('token', data.data.tokenID);
                 console.log("submitLogin().usertype : " + data.data.usertype);
                 localStorage.setItem('usertype', data.data.usertype);
+                localStorage.setItem('userid', data.data.userid);
 
                 dispatch(userLoggedIn(data.data.username, data.data.usertype));
             })
@@ -127,10 +128,30 @@ export function getAllUsers(){
 }
 
 export function logoutUser() {
+
     return dispatch => {
-        localStorage.removeItem('username');
-        localStorage.removeItem('token');
-        localStorage.removeItem('usertype');
-        dispatch(logout());
+        return fetch(`/user/logout`)
+            .then((response) => {
+                if (!response.ok) {
+                    console.log("Logout().Error");
+                    throw Error(response.statusText);
+                }
+                console.log("Successfull Logout!");
+                localStorage.removeItem('username');
+                localStorage.removeItem('token');
+                localStorage.removeItem('usertype');
+                localStorage.removeItem('userid');
+                localStorage.clear();
+                dispatch(logout());
+                return response.json();
+            })
+            .catch((e) => console.log(e));
     }
+    // return dispatch => {
+    //     localStorage.removeItem('username');
+    //     localStorage.removeItem('token');
+    //     localStorage.removeItem('usertype');
+    //     localStorage.clear();
+    //     dispatch(logout());
+    // }
 }

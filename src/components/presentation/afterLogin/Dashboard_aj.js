@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import constants from "../../../constants/actionTypes";
-import {withRouter} from "react-router-dom";
-import {connect} from "react-redux";
-import {Route, BrowserRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { Route, BrowserRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import openSocket from 'socket.io-client';
 
@@ -11,13 +11,18 @@ class Dashboard_aj extends Component {
 
     switchDashboards = () => {
 
+
+        if (localStorage.getItem("userid")) {
+            var userId = localStorage.getItem('userid');
+        }
+
         console.log("this.props.usertype :" + this.props.usertype);
-        switch(this.props.usertype){
+        switch (this.props.usertype) {
 
             case 'admin':
                 const adminDashboard = (<div className="sidenav">
-                     <Link to={'/loginselection/adminDashboard'}>Dashboard</Link>
-                    <Link to={'/loginselection/userManagement'}>User Management</Link>
+                    <Link to={'/adminDashboard/' + userId}>Dashboard</Link>
+                    <Link to={'/userManagement/viewUser/'+userId}>User Management</Link>
                     <a href="#clients">Attendance</a>
                     <a href="#contact">Settings</a></div>);
 
@@ -26,9 +31,9 @@ class Dashboard_aj extends Component {
             case 'lecturer':
                 const lecturerDasboard = (<div className="sidenav">
                     <a href="#about">Lecturer Dasboard</a>
-                    <Link to={'/loginselection/mainView'}>Main View</Link>
-                    <Link to={'/loginselection/liveStream'}>Live Stream</Link>
-                    <Link to={'/loginselection/lectureVideos'}>Lecture Videos</Link>
+                    <Link to={'/mainView/' + userId}>Main View</Link>
+                    <Link to={'/liveStream/' + userId}>Live Stream</Link>
+                    <Link to={'/lectureVideos/' + userId}>Lecture Videos</Link>
                     <a href="#contact">Settings</a></div>);
 
                 return lecturerDasboard;
@@ -36,7 +41,7 @@ class Dashboard_aj extends Component {
             case 'student':
                 const studentDasboard = (<div className="sidenav">
                     <a href="#about">Student Dasboard</a>
-                    <Link to={'/loginselection/liveStream'}>Live Stream</Link>
+                    <Link to={'/liveStream/' + userId}>Live Stream</Link>
                     {/*<a href="#clients">Attendance</a>*/}
                     <a href="#contact">Settings</a></div>);
 
@@ -48,7 +53,7 @@ class Dashboard_aj extends Component {
 
         return (
             <div>
-                { this.switchDashboards()}
+                {this.switchDashboards()}
 
                 <div className="main">
                     {this.props.children}
