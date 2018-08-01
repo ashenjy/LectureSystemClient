@@ -54,7 +54,7 @@ class LectureVideos_lt extends Component{
     }
 
     componentWillMount() {
-        if (localStorage.getItem("userid")) {
+        if (sessionStorage.getItem("userid")) {
 
         }
         else {
@@ -65,7 +65,7 @@ class LectureVideos_lt extends Component{
     render() {
 
         if(this.state.redirect){
-            return(<Redirect to={'/loginselection'}/>)
+            return(<Redirect to={'/'}/>)
         }
 
         return (

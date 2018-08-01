@@ -79,7 +79,7 @@ class Register_aj extends Component {
 
     componentWillMount() {
         this.props.dispatch(getRegsterResponseMessage(''));
-        if (localStorage.getItem("userid")) {
+        if (sessionStorage.getItem("userid")) {
 
         }
         else {
@@ -90,7 +90,7 @@ class Register_aj extends Component {
     render() {
 
         if(this.state.redirect){
-            return(<Redirect to={'/loginselection'}/>)
+            return(<Redirect to={'/'}/>)
         }
 
         const successMsg = (<div className="alert alert-success" role="alert">Successfully Registered..</div>);

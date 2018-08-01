@@ -43,9 +43,9 @@ class App extends Component {
             <BrowserRouter>
             <Layout>
                 <Switch>
-                    <Route exact path="/" component={Home} />
+                    <Route exact path="/" component={LoginSelection_aj} />
                     <Route path="/about" component={About} />
-                    <Route path="/loginselection" component={LoginSelection_aj} />
+                    <Route path="/home" component={Home} />
                     <Dashboard_aj>
                     <Route path="/userManagement/:userid" component={UserManagement_aj} />
                     <Route path="/userManagement/viewUser/:userid" component={ViewUsers_aj} />

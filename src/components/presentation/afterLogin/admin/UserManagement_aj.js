@@ -12,7 +12,7 @@ class UserManagement_aj extends Component {
     }
 
     componentWillMount() {
-        if (localStorage.getItem("userid")) {
+        if (sessionStorage.getItem("userid")) {
 
         }
         else {
@@ -23,11 +23,11 @@ class UserManagement_aj extends Component {
     render() {
 
         if(this.state.redirect){
-            return(<Redirect to={'/loginselection'}/>)
+            return(<Redirect to={'/'}/>)
         }
 
-        if (localStorage.getItem("userid")) {
-            var userId = localStorage.getItem('userid');
+        if (sessionStorage.getItem("userid")) {
+            var userId = sessionStorage.getItem('userid');
         }
 
         return (

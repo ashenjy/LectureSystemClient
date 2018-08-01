@@ -12,17 +12,22 @@ class Dashboard_aj extends Component {
     switchDashboards = () => {
 
 
-        if (localStorage.getItem("userid")) {
-            var userId = localStorage.getItem('userid');
+        if (sessionStorage.getItem("userid")) {
+            var userId = sessionStorage.getItem('userid');
         }
 
-        console.log("this.props.usertype :" + this.props.usertype);
-        switch (this.props.usertype) {
+        if (sessionStorage.getItem("usertype")) {
+            var usertype = sessionStorage.getItem('usertype');
+        }
+
+        console.log("this.props.usertype :" + usertype);
+        switch (usertype) {
 
             case 'admin':
                 const adminDashboard = (<div className="sidenav">
                     <Link to={'/adminDashboard/' + userId}>Dashboard</Link>
                     <Link to={'/userManagement/viewUser/'+userId}>User Management</Link>
+                    <Link to={'/session/'+userId}>Session Management</Link>
                     <a href="#clients">Attendance</a>
                     <a href="#contact">Settings</a></div>);
 

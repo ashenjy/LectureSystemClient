@@ -13,7 +13,7 @@ class MainView_vm extends Component {
     }
 
     componentWillMount() {
-        if (localStorage.getItem("userid")) {
+        if (sessionStorage.getItem("userid")) {
 
         }
         else {
@@ -23,7 +23,7 @@ class MainView_vm extends Component {
 
     render() {
         if(this.state.redirect){
-            return(<Redirect to={'/loginselection'}/>)
+            return(<Redirect to={'/'}/>)
         }
 
         return (

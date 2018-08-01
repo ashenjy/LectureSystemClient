@@ -54,11 +54,11 @@ export function submitLogin(data){
                 return response.json();
             })
             .then( (data) => {
-                localStorage.setItem('username', data.data.username);
-                localStorage.setItem('token', data.data.tokenID);
+                sessionStorage.setItem('username', data.data.username);
+                sessionStorage.setItem('token', data.data.tokenID);
                 console.log("submitLogin().usertype : " + data.data.usertype);
-                localStorage.setItem('usertype', data.data.usertype);
-                localStorage.setItem('userid', data.data.userid);
+                sessionStorage.setItem('usertype', data.data.usertype);
+                sessionStorage.setItem('userid', data.data.userid);
 
                 dispatch(userLoggedIn(data.data.username, data.data.usertype));
             })
@@ -99,8 +99,8 @@ export function submitRegister(data,files,userTypeFound){
             })
             .then( (data) => {
 
-                // localStorage.setItem('username', data.data.username);
-                // localStorage.setItem('token', data.data.tokenID);
+                // sessionStorage.setItem('username', data.data.username);
+                // sessionStorage.setItem('token', data.data.tokenID);
                 //
                 // dispatch(userLoggedIn(data.data.username));
 
@@ -137,21 +137,21 @@ export function logoutUser() {
                     throw Error(response.statusText);
                 }
                 console.log("Successfull Logout!");
-                localStorage.removeItem('username');
-                localStorage.removeItem('token');
-                localStorage.removeItem('usertype');
-                localStorage.removeItem('userid');
-                localStorage.clear();
+                sessionStorage.removeItem('username');
+                sessionStorage.removeItem('token');
+                sessionStorage.removeItem('usertype');
+                sessionStorage.removeItem('userid');
+                sessionStorage.clear();
                 dispatch(logout());
                 return response.json();
             })
             .catch((e) => console.log(e));
     }
     // return dispatch => {
-    //     localStorage.removeItem('username');
-    //     localStorage.removeItem('token');
-    //     localStorage.removeItem('usertype');
-    //     localStorage.clear();
+    //     sessionStorage.removeItem('username');
+    //     sessionStorage.removeItem('token');
+    //     sessionStorage.removeItem('usertype');
+    //     sessionStorage.clear();
     //     dispatch(logout());
     // }
 }

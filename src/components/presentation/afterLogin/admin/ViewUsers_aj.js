@@ -29,7 +29,7 @@ class ViewUsers_aj extends Component {
 
 
     componentWillMount() {
-        if (localStorage.getItem("userid")) {
+        if (sessionStorage.getItem("userid")) {
 
         }
         else {
@@ -50,7 +50,7 @@ class ViewUsers_aj extends Component {
                     <td>{users.username}</td>
                     <td>{users.password}</td>
                     <td>{users.usertype}</td>
-                    <td>{users.created}</td>
+                    <td>{users.created.substring(0,10)}</td>
                     {users.images.length == 0 ? noImages : <td>{users.images.map((f, index) => <img className="register" width={50}
                         height={50} key={index} src={"/" + f} />
                     )}</td>}
@@ -63,7 +63,7 @@ class ViewUsers_aj extends Component {
     render() {
 
         if(this.state.redirect){
-            return(<Redirect to={'/loginselection'}/>)
+            return(<Redirect to={'/'}/>)
         }
         
         return (
