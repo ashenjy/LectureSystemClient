@@ -1,9 +1,9 @@
 import constants from '../constants/actionTypes'
 
 var initialState = {
-    loggedIn: localStorage.getItem('token') ? true : false,
-    username: localStorage.getItem('username') ? localStorage.getItem('username') : '',
-    usertype: localStorage.getItem('usertype') ? localStorage.getItem('usertype') : '',
+    loggedIn: sessionStorage.getItem('token') ? true : false,
+    username: sessionStorage.getItem('username') ? sessionStorage.getItem('username') : '',
+    usertype: sessionStorage.getItem('usertype') ? sessionStorage.getItem('usertype') : '',
     getRegisterResponseMsg: '',
     getAllUsers : []
 }

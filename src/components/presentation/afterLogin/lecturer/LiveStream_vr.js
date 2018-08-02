@@ -12,7 +12,7 @@ class LiveStream_vr extends Component {
     }
 
     componentWillMount() {
-        if (localStorage.getItem("userid")) {
+        if (sessionStorage.getItem("userid")) {
 
         }
         else {
@@ -23,7 +23,7 @@ class LiveStream_vr extends Component {
     render() {
 
         if(this.state.redirect){
-            return(<Redirect to={'/loginselection'}/>)
+            return(<Redirect to={'/'}/>)
         }
 
         return (

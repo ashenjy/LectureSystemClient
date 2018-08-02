@@ -13,17 +13,17 @@ class Layout extends Component {
 
     render() {
 
-        const homeLink = (<li className="active"><Link to={'/'}>Home</Link></li>);
+        const homeLink = (<li className="active"><Link to={'/home'}>Home</Link></li>);
         const aboutLink = (<li><Link to={'/about'}>About</Link></li>);
 
         const userLoggedIn = (
             <li>
-                 <p className="navbar-text" style={{margin:'15px 0px 0px'}}><span className="glyphicon glyphicon-user"></span> { this.props.username}</p>
-                <p className="navbar-text"><Link className="navbar-link" to={'/loginselection'} onClick={this.logout.bind(this)}>Logout</Link></p>
+                 <p className="navbar-text" style={{margin:'15px 0px 0px'}}><span className="glyphicon glyphicon-user"></span> { sessionStorage.getItem('username')}</p>
+                <p className="navbar-text"><Link className="navbar-link" to={'/'} onClick={this.logout.bind(this)}>Logout</Link></p>
             </li>
 
         );
-        const userNotLoggedIn = (<li><Link to={'/loginselection'}><span className="glyphicon glyphicon-log-in"></span> Login</Link></li>)
+        const userNotLoggedIn = (<li><Link to={'/'}><span className="glyphicon glyphicon-log-in"></span> Login</Link></li>)
         return (
             <div>
                     <nav className="navbar navbar-inverse">

@@ -120,11 +120,11 @@ class Login_aj extends Component {
             return response.json();
         })
             .then(data => {
-                localStorage.setItem('username', data.data.username);
-                localStorage.setItem('token', data.data.tokenID);
+                sessionStorage.setItem('username', data.data.username);
+                sessionStorage.setItem('token', data.data.tokenID);
                 console.log("submitLogin().usertype : " + data.data.usertype);
-                localStorage.setItem('usertype', data.data.usertype);
-
+                sessionStorage.setItem('usertype', data.data.usertype);
+                sessionStorage.setItem('userid', data.data.userid);
                 this.props.dispatch(userLoggedIn(data.data.username, data.data.usertype));
 
             })
