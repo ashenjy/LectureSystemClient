@@ -51,6 +51,7 @@ class LectureVideos_lt extends Component{
                 alert("Failed");
             }
         })
+
     }
 
     componentWillMount() {
@@ -109,7 +110,7 @@ class LectureVideos_lt extends Component{
                                     </td>
                                     :
                                     <td>
-                                        <Link to={'/loginselection/videoChapters?lectureVideo=' + video.lectureVideo} className="btn btn-success">View
+                                        <Link to={'/videoChapters/:userid?lectureVideo=' + video.lectureVideo} className="btn btn-success">View
                                             Chapters</Link>
                                     </td>
                                 }
