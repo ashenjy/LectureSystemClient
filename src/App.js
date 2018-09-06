@@ -18,6 +18,7 @@ import FaceLogin from './components/presentation/beforeLogin/FaceRecognition/Fac
 import LectureVideos_lt from "./components/presentation/afterLogin/lecturer/LectureVideos_lt";
 import VideoChapters_lt from "./components/presentation/afterLogin/lecturer/VideoChapters_lt";
 import adminDashboard from './components/presentation/afterLogin/admin/adminDashboard';
+import Attendance from './components/presentation/afterLogin/admin/Attendance';
 
 class App extends Component {
 
@@ -55,6 +56,7 @@ class App extends Component {
                     <Route path="/lectureVideos/:userid" component={LectureVideos_lt} />
                     <Route path="/videoChapters/:userid" component={VideoChapters_lt} />
                     <Route path="/adminDashboard/:userid" component={adminDashboard} />
+                    <Route path="/attendance/:userid" component={Attendance} />
                     </Dashboard_aj>
                 </Switch>
             </Layout>

@@ -28,7 +28,7 @@ class Dashboard_aj extends Component {
                     <Link to={'/adminDashboard/' + userId}>Dashboard</Link>
                     <Link to={'/userManagement/viewUser/'+userId}>User Management</Link>
                     <Link to={'/session/'+userId}>Session Management</Link>
-                    <a href="#clients">Attendance</a>
+                    <Link to={'/attendance/'+userId}>Attendance</Link>
                     <a href="#contact">Settings</a></div>);
 
                 return adminDashboard;
