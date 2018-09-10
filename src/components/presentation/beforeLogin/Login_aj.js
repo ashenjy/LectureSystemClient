@@ -84,14 +84,8 @@ class Login_aj extends Component {
         let imageSrc = this.webcam.getScreenshot();
         if (imageSrc != isNull) {
             console.log("Image src :" + imageSrc);
-            // this.setState({
-            //     src :{
-            //         imageString : imageSrc
-            //     }
-            // });
             let base64 = { imageString: imageSrc };
             console.log("imageString :" + base64);
-            // this.showImage();
             this.faceRecognize(base64);
         } else {
             console.log("Please try again!");
@@ -155,20 +149,10 @@ class Login_aj extends Component {
         return (
             <div>
 
-                {/*<Link to={'/faceLogin'}>Face Login</Link>*/}
-
                 <div className="col-md-4">
                     {this.state.allowWebcam === true ? webcamCode : null}
                 </div>
-                {/*<div className="row">>*/}
-                {/*<canvas ref="canvas" width={640} height={425} />*/}
-                {/*<img ref="image" src={this.state.src.imageString} className="hidden" />*/}
-                {/*</div>*/}
 
-                {/*<h3>Login</h3>*/}
-                {/*Username <input onChange={this.updateDetails.bind(this)} id="username" type="text" placeholder= "Username"/><br/>*/}
-                {/*Password <input onChange={this.updateDetails.bind(this)} id="password" type="password" placeholder= "Password"/><br/>*/}
-                {/*<button onClick={this.login.bind(this)}>Login</button>*/}
                 <div className="col-md-4">
                     <div className="login-form">
                         <div className="form">
