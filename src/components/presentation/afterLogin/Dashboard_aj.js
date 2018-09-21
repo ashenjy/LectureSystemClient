@@ -27,8 +27,8 @@ class Dashboard_aj extends Component {
                 const adminDashboard = (<div className="sidenav">
                     <Link to={'/adminDashboard/' + userId}>Dashboard</Link>
                     <Link to={'/userManagement/viewUser/'+userId}>User Management</Link>
-                    <Link to={'/session/'+userId}>Session Management</Link>
-                    <Link to={'/attendance/'+userId}>Attendance</Link>
+                    <Link to={'/bandwidth/'+userId}>Bandwidth Management</Link>
+                    <Link to={'/attendanceManagement/'+userId}>Attendance Management</Link>
                     <a href="#contact">Settings</a></div>);
 
                 return adminDashboard;

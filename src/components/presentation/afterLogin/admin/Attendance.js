@@ -10,11 +10,14 @@ class Attendance extends Component {
         super(props);
         this.state = {
             attendanceError: false,
-            redirect: false
+            redirect: false,
+            attendanceDataSet: []
         };
 
         this.capture.bind(this);
+        this.getAllattendance.bind(this);
         this.faceRecognize.bind(this);
+        // this.organizeAttendanceDataSet = this.organizeAttendanceDataSet.bind(this);
 
     }
 
@@ -25,6 +28,18 @@ class Attendance extends Component {
         else {
             this.setState({ redirect: true });
         }
+    }
+
+    componentDidMount() {
+        fetch('/student/getAllAttendance')
+            .then(response => {
+                return response.json();
+            })
+            .then(dataset => {
+                this.setState({
+                    attendanceDataSet: dataset.data.result
+                });
+            });
     }
 
     setRef = (webcam) => {
@@ -62,18 +77,71 @@ class Attendance extends Component {
                 throw Error(response.statusText);
             }
             console.log("Client().faceRecognize().Success");
+            this.getAllattendance();
             return response.json();
         })
             .then(data => {
-                localStorage.setItem('name', data.data.username);
-                console.log("type : " + data.data.usertype);
-                localStorage.setItem('type', data.data.usertype);
-                localStorage.setItem('id', data.data.userid);
-                // this.props.dispatch(userLoggedIn(data.data.username, data.data.usertype));
-
-
+                
             })
             .catch((e) => console.log(e));
+    }
+
+    getAllattendance(){
+        fetch('/student/getAllAttendance')
+        .then(response => {
+            return response.json();
+        })
+        .then(dataset => {
+            this.setState({
+                attendanceDataSet: dataset.data.result
+            });
+        });
+    }
+
+    deleteAttendance(attendance, index) {
+
+        if (attendance != null && index != null) {
+
+            var tempAttendance = [...this.state.attendanceDataSet];
+            tempAttendance.splice(index, 1);
+            this.setState({
+                attendanceDataSet: tempAttendance
+            });
+
+            var data = {
+                attendanceId: attendance._id
+            }
+            fetch("/student/delete", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(function (response) {
+                if (!response.ok) {
+                    throw new Error("Bad response from server");
+                }
+                return response.json();
+
+            }).catch(function (err) {
+                console.log(err)
+            });
+        }
+    }
+
+    organizeAttendanceDataSet() {
+
+        return this.state.attendanceDataSet.map((dataset, index) => {
+            return (
+                <tr key={dataset._id}>
+                    <td>{index + 1}</td>
+                    <td>{dataset.username}</td>
+                    <td>{dataset.usertype}</td>
+                    <td>{dataset.status}</td>
+                    <td>{dataset.created.substring(0, 10)}</td>
+                    <td>{dataset.created.substring(12, 19)}</td>
+                    <td><a onClick={() => this.deleteAttendance(dataset, index)}>Delete</a></td>
+                </tr>
+            );
+        })
     }
 
     render() {
@@ -81,7 +149,7 @@ class Attendance extends Component {
             return (<Redirect to={'/'} />)
         }
 
-        const faceAlert = (<div className="alert alert-danger" role="alert">Face not recognized! Please try again!</div>);
+        const faceAlert = (<div className="alert alert-danger" role="alert">Server Error! Please try again!</div>);
         const webcamCode = (
             <div>
                 <Webcam
@@ -90,11 +158,11 @@ class Attendance extends Component {
                     ref={this.setRef}
                     screenshotFormat="image/jpeg"
                     width={400}
-                    style={{ margin: '0 0 0 30%' }}
+                    style={{ margin: '0 0 0 15%' }}
                 />
 
                 <button onClick={this.capture}
-                    className="btn btn-primary btn-lg btn-block">Mark Attendance</button>
+                    className="btn btn-primary btn-lg btn-block"  style={{ margin: '0 0 0 15%' }}>Mark Attendance</button>
 
                 {this.state.attendanceError === true ? faceAlert : null}
 
@@ -110,22 +178,27 @@ class Attendance extends Component {
                     <div className="col-md-4">
                         {webcamCode}
                     </div>
-                    <div className="col-md-8">
+                    <div className="col-md-6" style={{ margin: '0 0 0 10%' }}>
                         <table id="example" className="table table-striped table-bordered dt-responsive nowrap">
                             <thead>
                                 <tr>
                                     <th>Id</th>
                                     <th>User Name</th>
                                     <th>User Type</th>
-                                    <th>Date</th>
+                                    <th>Present/Absent</th>
+                                    <th>Date</th>  
+                                    <th>Time</th>            
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                {/* <tr>
                                     <td>{localStorage.getItem('id')}</td>
                                     <td>{localStorage.getItem('name')}</td>
                                     <td>{localStorage.getItem('type')}</td>
-                                </tr>
+                                    <td>{localStorage.getItem('status')}</td>
+                                    <td>{localStorage.getItem('date')}</td>
+                                </tr> */}
+                                {this.organizeAttendanceDataSet()}
                             </tbody>
                         </table>
                     </div>

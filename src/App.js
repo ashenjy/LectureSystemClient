@@ -8,6 +8,7 @@ import Home from './components/layouts/Home';
 import About from './components/layouts/About';
 import Layout from './components/layouts/Layout';
 import UserManagement_aj from './components/presentation/afterLogin/admin/UserManagement_aj';
+import AttendanceManagement_aj from './components/presentation/afterLogin/admin/AttendanceManagement_aj';
 import Dashboard_aj from './components/presentation/afterLogin/Dashboard_aj';
 import Register_aj from './components/presentation/afterLogin/admin/Register_aj';
 import LoginSelection_aj from './components/presentation/beforeLogin/LoginSelection_aj';
@@ -18,7 +19,9 @@ import FaceLogin from './components/presentation/beforeLogin/FaceRecognition/Fac
 import LectureVideos_lt from "./components/presentation/afterLogin/lecturer/LectureVideos_lt";
 import VideoChapters_lt from "./components/presentation/afterLogin/lecturer/VideoChapters_lt";
 import adminDashboard from './components/presentation/afterLogin/admin/adminDashboard';
-import Attendance from './components/presentation/afterLogin/admin/Attendance';
+import Attendance1 from './components/presentation/afterLogin/admin/Attendance';
+import Attendance2 from './components/presentation/afterLogin/admin/Attendance2';
+import Bandwidth from './components/presentation/afterLogin/admin/Bandwidth';
 
 class App extends Component {
 
@@ -56,7 +59,10 @@ class App extends Component {
                     <Route path="/lectureVideos/:userid" component={LectureVideos_lt} />
                     <Route path="/videoChapters/:userid" component={VideoChapters_lt} />
                     <Route path="/adminDashboard/:userid" component={adminDashboard} />
-                    <Route path="/attendance/:userid" component={Attendance} />
+                    <Route path="/bandwidth/:userid" component={Bandwidth} />
+                    <Route path="/attendanceManagement/:userid" component={AttendanceManagement_aj} />
+                    <Route path="/attendanceManagement/attendance1/:userid" component={Attendance1} />
+                    <Route path="/attendanceManagement/attendance2/:userid" component={Attendance2} />
                     </Dashboard_aj>
                 </Switch>
             </Layout>
