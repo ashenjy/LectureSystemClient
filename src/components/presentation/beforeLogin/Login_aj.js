@@ -24,6 +24,7 @@ class Login_aj extends Component {
 
         this.confirmBox.bind(this);
         this.capture.bind(this);
+        this.faceLoginButtonClick.bind(this);
         this.faceRecognize.bind(this);
     }
 
@@ -93,6 +94,31 @@ class Login_aj extends Component {
 
     };
 
+    faceLoginButtonClick = () => {
+        fetch('/user/loginNew')
+        .then(response => {
+            if (!response.ok) {
+                console.log("Client().faceRecognize().Error :" + response.statusText);
+                this.setState({
+                    faceLoginError: true
+                });
+                throw Error(response.statusText);
+            }
+            console.log("Client().faceRecognize().Success");
+            return response.json();
+        })
+            .then(data => {
+                sessionStorage.setItem('username', data.data.username);
+                sessionStorage.setItem('token', data.data.tokenID);
+                console.log("submitLogin().usertype : " + data.data.usertype);
+                sessionStorage.setItem('usertype', data.data.usertype);
+                sessionStorage.setItem('userid', data.data.userid);
+                this.props.dispatch(userLoggedIn(data.data.username, data.data.usertype));
+
+            })
+            .catch((e) => console.log(e));
+    }
+
     faceRecognize(base64) {
         fetch('/user/faceLogin', {
             method: 'POST',
@@ -137,7 +163,7 @@ class Login_aj extends Component {
                     screenshotFormat="image/jpeg"
                     width={400}
                 />
-                
+
                 <button onClick={this.capture}
                     className="btn btn-primary btn-lg btn-block">Face Login</button>
 
@@ -150,7 +176,11 @@ class Login_aj extends Component {
             <div>
 
                 <div className="col-md-4">
-                    {this.state.allowWebcam === true ? webcamCode : null}
+                    {/* {this.state.allowWebcam === true ? webcamCode : null} */}
+                    <img src="http://localhost:5004/video_feed" width="400" height="350"></img>
+                    <button onClick={this.faceLoginButtonClick}
+                        className="btn btn-primary btn-lg btn-block">Face Login</button>
+                        {this.state.faceLoginError === true ? faceAlert : null}
                 </div>
 
                 <div className="col-md-4">

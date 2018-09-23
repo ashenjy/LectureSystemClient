@@ -34,8 +34,8 @@ class AttendanceManagement_aj extends Component {
             <div>
                 <h3>Attendance Management</h3>
                 <ol className="breadcrumb">
-                    <li><Link to={'/attendanceManagement/attendance1/'+userId}>Process1</Link></li>
-                    <li><Link to={'/attendanceManagement/attendance2/'+userId}>Process2</Link></li>
+                    {/* <li><Link to={'/attendanceManagement/attendance1/'+userId}>Process1</Link></li> */}
+                    <li><Link to={'/attendanceManagement/attendance2/'+userId}>Mark Attendance</Link></li>
                 </ol>
 
                 <div>
