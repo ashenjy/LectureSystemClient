@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
+// import { makeData, Logo, Tips } from "../../../../css/TableUtil";
+
+// Import React Table
+import ReactTable from "react-table";
+import "../../../../../node_modules/react-table/react-table.css";
 
 class Attendance2 extends Component {
 
@@ -9,9 +14,8 @@ class Attendance2 extends Component {
         this.state = {
             attendanceError: false,
             redirect: false,
-            attendanceDataSet: []
-        };
-       
+            attendanceDataSet: []        };
+
         this.markAttendance.bind(this);
         this.getAllattendance = this.getAllattendance.bind(this);
     }
@@ -48,9 +52,13 @@ class Attendance2 extends Component {
             });
     }
 
-    
+
 
     deleteAttendance(attendance, index) {
+
+        console.log("deleteAttendance :" + JSON.stringify(attendance));
+        console.log("deleteAttendance index:" + JSON.stringify(index));
+
 
         if (attendance != null && index != null) {
 
@@ -111,7 +119,7 @@ class Attendance2 extends Component {
                 return response.json();
             })
             .then(data => {
-                
+
             })
             .catch((e) => console.log(e));
     }
@@ -133,6 +141,8 @@ class Attendance2 extends Component {
             return (<Redirect to={'/'} />)
         }
 
+        const { attendanceDataSet } = this.state;
+
         const faceAlert = (<div className="alert alert-danger" role="alert">Server Error! Please try again!</div>);
 
         return (
@@ -140,14 +150,14 @@ class Attendance2 extends Component {
                 {/* <h3>Mark Attendance</h3> */}
                 <div className="row">
                     <div className="col-md-4">
-                        <img src="http://localhost:5004/video_feed"></img>
+                        <img src="http://localhost:5004/video_feed" width="500" height="300" ></img>
 
                         <button onClick={this.markAttendance.bind(this)}
                             className="btn btn-primary btn-lg btn-block" style={{ margin: '0 0 0 15%' }}>Mark Attendance</button>
 
                         {this.state.attendanceError === true ? faceAlert : null}
                     </div>
-                    <div className="col-md-6" style={{ margin: '0 0 0 10%' }}>
+                    {/* <div className="col-md-6" style={{ margin: '0 0 0 10%' }}>
                         <table id="example" className="table table-striped table-bordered dt-responsive nowrap">
                             <thead>
                                 <tr>
@@ -165,8 +175,62 @@ class Attendance2 extends Component {
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> */}
 
+                    <div className="col-md-6" style={{ margin: '0 0 0 10%' }}>
+
+                        <ReactTable
+                            data={attendanceDataSet}
+                            filterable
+                            defaultFilterMethod={(filter, row) =>
+                                String(row[filter.id]) === filter.value}
+                            columns={[
+                                {
+                                    Header: "Id",
+                                    id: "_id",
+                                    Cell: row => row.index + 1,
+                                    width: 30
+
+
+                                }, {
+                                    Header: "Name",
+                                    accessor: "username"
+                                }, {
+                                    Header: "User Type",
+                                    accessor: "usertype"
+                                }, {
+                                    Header: "Status",
+                                    accessor: "status"
+                                }, {
+                                    Header: "Date",
+                                    id: "created",
+                                    accessor: (row) => row.created.substring(0, 10)
+                                    // Cell:  value  => value.substring(0,10)
+                                }, {
+                                    Header: "Time",
+                                    id: "created1",
+                                    accessor: (row) => row.created.substring(12, 19),
+                                    width: 80
+                                    // Cell: value => value.substring(12,19)
+
+                                },
+                                {
+                                    Header: "",
+                                    id: "delete",
+                                    Cell: (row) => (
+                                        <a onClick={() => this.deleteAttendance(row, row.index)}><span className="glyphicon glyphicon-remove"></span></a>
+                                    ),
+                                    width: 50
+                                    // Cell: value => value.substring(12,19)
+
+                                }
+                            ]}
+                            defaultPageSize={5}
+                            className="-striped -highlight"
+                        />
+                    </div>
+
+                </div>
             </div>
         )
     }

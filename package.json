@@ -19,12 +19,14 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "react-webcam": "^0.5.0",
+    "react-table": "6.7.0-alpha-0",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.3.1",
     "semantic-ui-react": "^0.81.3",
     "socket.io-client": "^2.1.1",
-    "superagent": "^3.8.3"
+    "superagent": "^3.8.3",
+    "namor": "1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
