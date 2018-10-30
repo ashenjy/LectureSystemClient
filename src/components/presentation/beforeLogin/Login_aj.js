@@ -178,7 +178,7 @@ class Login_aj extends Component {
                 <div className="col-md-4">
                     {/* {this.state.allowWebcam === true ? webcamCode : null} */}
                     <div className="webcam">
-                        <img src="http://localhost:5004/video_feed" width="400" height="350"></img>
+                        <img src="http://localhost:5004/video_feed" width="490" height="350"></img>
                         <button onClick={this.faceLoginButtonClick}
                             className="btn btn-primary btn-lg btn-block">Face Login</button>
                         {this.state.faceLoginError === true ? faceAlert : null}
