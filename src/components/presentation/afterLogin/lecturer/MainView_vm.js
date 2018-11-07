@@ -6,8 +6,8 @@ import {Redirect} from 'react-router-dom';
 import {recalibrateCamera, turnDownCamera, turnRightCamera, turnUpCamera} from "../../../../services/ptzService_vm";
 import { turnLeftCamera } from "../../../../services/ptzService_vm";
 import { stopMovementCamera } from "../../../../services/ptzService_vm";
-import { zoomInCamera, zoomOutCamera } from "../../../../services/ptzService_vm";
-import { runTrackerScript } from "../../../../services/ptzService_vm";
+import { zoomInCamera, zoomOutCamera, turn_to_audience } from "../../../../services/ptzService_vm";
+import { runTrackerScript, startLectureTracker,stopTracker, startGestureDetection } from "../../../../services/ptzService_vm";
 class MainView_vm extends Component {
 
     constructor(props){
@@ -45,7 +45,7 @@ class MainView_vm extends Component {
     turnLeftCamera() {
         turnLeftCamera().then(data=> {
             //console.log('done');
-            console.log(data);
+            //console.log(data);
             if(data.success === true)
             {
                 alert("Success");
@@ -60,7 +60,7 @@ class MainView_vm extends Component {
     turnRightCamera() {
         turnRightCamera().then(data=> {
             //console.log('done');
-            console.log(data);
+            //console.log(data);
             if(data.success === true)
             {
                 //alert("Success");
@@ -75,7 +75,7 @@ class MainView_vm extends Component {
     turnUpCamera() {
         turnUpCamera().then(data=> {
             //console.log('done');
-            console.log(data);
+            //console.log(data);
             if(data.success === true)
             {
                 //alert("Success");
@@ -90,7 +90,7 @@ class MainView_vm extends Component {
     turnDownCamera() {
         turnDownCamera().then(data=> {
             //console.log('done');
-            console.log(data);
+            //console.log(data);
             if(data.success === true)
             {
                 //alert("Success");
@@ -104,7 +104,7 @@ class MainView_vm extends Component {
 
     zoomInCamera() {
         zoomInCamera().then(data=> {
-            console.log(data);
+            //console.log(data);
             if(data.success === true)
             {
                 //alert("Success");
@@ -118,7 +118,7 @@ class MainView_vm extends Component {
 
     zoomOutCamera() {
         zoomOutCamera().then(data=> {
-            console.log(data);
+            //console.log(data);
             if(data.success === true)
             {
                 //alert("Success");
@@ -133,7 +133,7 @@ class MainView_vm extends Component {
     stopMovementCamera() {
         stopMovementCamera().then(data=> {
             //console.log('done');
-            console.log(data);
+            //console.log(data);
             if(data.success === true)
             {
                 alert("Success");
@@ -144,6 +144,59 @@ class MainView_vm extends Component {
             }
         })
     }
+
+    turn_to_audience() {
+        turn_to_audience().then(data=> {
+            if(data.success === true)
+            {
+                alert("Success");
+            }
+            else
+            {
+                //alert("Failed");
+            }
+        })
+    }
+
+    startLectureTracker() {
+        startLectureTracker().then(data=> {
+            if(data.success === true)
+            {
+                //alert("Success");
+            }
+            else
+            {
+                //alert("Failed");
+            }
+        })
+    }
+
+    startGestureDetection() {
+        startGestureDetection().then(data=> {
+            if(data.success === true)
+            {
+                //alert("Success");
+            }
+            else
+            {
+                //alert("Failed");
+            }
+        })
+    }
+
+    stopTracker() {
+        stopTracker().then(data=> {
+            if(data.success === true)
+            {
+                //alert("Success");
+            }
+            else
+            {
+                //alert("Failed");
+            }
+        })
+    }
+
 
     runTrackerScript() {
         runTrackerScript().then(data=> {
@@ -207,7 +260,6 @@ class MainView_vm extends Component {
                             </tr>
 
 
-
                         </table>
                     </div>
 
@@ -231,21 +283,18 @@ class MainView_vm extends Component {
                     <div className="col s6 center">
                         <button id="btnRefresh" className="btn btn-success"
                                 onClick={this.recalibrateCamera}>Recalibrate</button>&nbsp;&nbsp;
-                        {/*<button id="btnRefresh" className="btn btn-success">Turn to Audience</button>&nbsp;&nbsp;*/}
-                        <button id="btnRefresh" className="btn btn-success">Turn to Audience</button>&nbsp;&nbsp;
-                        <button id="btnRefresh" className="btn btn-success">Turn Back to Lecturer</button>&nbsp;&nbsp;
+                        <button id="btnRefresh" className="btn btn-success" onClick={this.turn_to_audience}>Turn to Audience</button>&nbsp;&nbsp;
+                        <button id="btnRefresh" className="btn btn-success" onClick={this.recalibrateCamera}>Turn Back to Lecturer</button>&nbsp;&nbsp;
                         <button id="btnClear" className="btn btn-danger" onClick={this.stopMovementCamera}>Stop</button>
                     </div>
-
-
 
                     <br/>
                     <br/>
                     <div className="col s6 center">
-                        <button id="btnRefresh" className="btn btn-success" onClick={this.runTrackerScript}>Start Lecturer Tracker</button>&nbsp;&nbsp;
-                        <button id="btnRefresh" className="btn btn-success">Start Gesture Detection</button>&nbsp;&nbsp;
-                        <button id="btnRefresh" className="btn btn-danger">Stop Tracker</button>&nbsp;&nbsp;
-                        <button id="btnClear" className="btn btn-info">Keypress Camera Move</button>
+                        <button id="btnRefresh" className="btn btn-success" onClick={this.startLectureTracker}>Start Lecturer Tracker</button>&nbsp;&nbsp;
+                        <button id="btnRefresh" className="btn btn-success" onClick={this.startGestureDetection}>Start Gesture Detection</button>&nbsp;&nbsp;
+                        <button id="btnRefresh" className="btn btn-danger" onClick={this.stopTracker}>Stop Tracker</button>&nbsp;&nbsp;
+                        <button id="btnClear" className="btn btn-info" onClick={this.runTrackerScript}>Keypress Camera Move</button>
                     </div>
                 </div>
 

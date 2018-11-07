@@ -53,3 +53,27 @@ export function runTrackerScript() {
         .then(res => res.data)
         .catch(error => error);
 }
+
+export function turn_to_audience() {
+    return axios.get('/api/turn_to_audience')
+        .then(res => res.data)
+        .catch(error => error);
+}
+
+export function startLectureTracker() {
+    return axios.get('/api/startLectureTracker')
+        .then(res => res.data)
+        .catch(error => error);
+}
+
+export function startGestureDetection() {
+    return axios.get('/api/startGestureDetection')
+        .then(res => res.data)
+        .catch(error => error);
+}
+
+export function stopTracker() {
+    return axios.get('/api/stopTracker')
+        .then(res => res.data)
+        .catch(error => error);
+}
