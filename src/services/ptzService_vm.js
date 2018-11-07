@@ -35,3 +35,21 @@ export function stopMovementCamera() {
         .then(res => res.data)
         .catch(error => error);
 }
+
+export function zoomInCamera() {
+    return axios.get('/api/zoomInCamera')
+        .then(res => res.data)
+        .catch(error => error);
+}
+
+export function zoomOutCamera() {
+    return axios.get('/api/zoomOutCamera')
+        .then(res => res.data)
+        .catch(error => error);
+}
+
+export function runTrackerScript() {
+    return axios.get('/api/runTrackerScript')
+        .then(res => res.data)
+        .catch(error => error);
+}

@@ -22,6 +22,9 @@ import adminDashboard from './components/presentation/afterLogin/admin/adminDash
 import Attendance1 from './components/presentation/afterLogin/admin/Attendance';
 import Attendance2 from './components/presentation/afterLogin/admin/Attendance2';
 import Bandwidth from './components/presentation/afterLogin/admin/Bandwidth';
+import CourseManagement from './components/presentation/afterLogin/admin/CourseManagement_vm';
+import addCourse_vm from "./components/presentation/afterLogin/admin/addCourse_vm";
+import viewCourse_vm from "./components/presentation/afterLogin/admin/viewCourses_vm";
 
 class App extends Component {
 
@@ -63,6 +66,9 @@ class App extends Component {
                     <Route path="/attendanceManagement/:userid" component={AttendanceManagement_aj} />
                     <Route path="/attendanceManagement/attendance1/:userid" component={Attendance1} />
                     <Route path="/attendanceManagement/attendance2/:userid" component={Attendance2} />
+                    <Route path="/courseManagement/:userid" component={CourseManagement} />
+                        <Route path="/courseManagement/viewCourse/:userid" component={viewCourse_vm} />
+                        <Route path="/courseManagement/addNewCourse/:userid" component={addCourse_vm} />
                     </Dashboard_aj>
                 </Switch>
             </Layout>

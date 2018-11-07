@@ -6,8 +6,8 @@ import {Redirect} from 'react-router-dom';
 import {recalibrateCamera, turnDownCamera, turnRightCamera, turnUpCamera} from "../../../../services/ptzService_vm";
 import { turnLeftCamera } from "../../../../services/ptzService_vm";
 import { stopMovementCamera } from "../../../../services/ptzService_vm";
-import {createVideoChaptersService} from "../../../../services/videosService_lt";
-
+import { zoomInCamera, zoomOutCamera } from "../../../../services/ptzService_vm";
+import { runTrackerScript } from "../../../../services/ptzService_vm";
 class MainView_vm extends Component {
 
     constructor(props){
@@ -37,7 +37,7 @@ class MainView_vm extends Component {
             }
             else
             {
-                alert("Failed");
+                //alert("Failed");
             }
         })
     }
@@ -52,7 +52,7 @@ class MainView_vm extends Component {
             }
             else
             {
-                alert("Failed");
+                //alert("Failed");
             }
         })
     }
@@ -67,7 +67,7 @@ class MainView_vm extends Component {
             }
             else
             {
-                alert("Failed");
+                //alert("Failed");
             }
         })
     }
@@ -82,7 +82,7 @@ class MainView_vm extends Component {
             }
             else
             {
-                alert("Failed");
+                //alert("Failed");
             }
         })
     }
@@ -97,7 +97,35 @@ class MainView_vm extends Component {
             }
             else
             {
-                alert("Failed");
+                //alert("Failed");
+            }
+        })
+    }
+
+    zoomInCamera() {
+        zoomInCamera().then(data=> {
+            console.log(data);
+            if(data.success === true)
+            {
+                //alert("Success");
+            }
+            else
+            {
+                //alert("Failed");
+            }
+        })
+    }
+
+    zoomOutCamera() {
+        zoomOutCamera().then(data=> {
+            console.log(data);
+            if(data.success === true)
+            {
+                //alert("Success");
+            }
+            else
+            {
+                //alert("Failed");
             }
         })
     }
@@ -112,12 +140,24 @@ class MainView_vm extends Component {
             }
             else
             {
-                alert("Failed");
+                //alert("Failed");
             }
         })
     }
 
-
+    runTrackerScript() {
+        runTrackerScript().then(data=> {
+            if(data.success === true)
+            {
+                alert("Success");
+            }
+            else
+            {
+                alert("Failed");
+            }
+           //alert('Done');
+        })
+    }
 
     render() {
         if(this.state.redirect){
@@ -127,6 +167,14 @@ class MainView_vm extends Component {
         return (
             <div>
                 <h3>Advanced Controls</h3>
+
+                {/*for design testing*/}
+                {/*<div className="col s6 center">*/}
+                    {/*<video width="600" height="300" autoPlay>*/}
+                        {/*<source src={process.env.PUBLIC_URL + '/videos/DemoLeftRightv.mp4'}/>*/}
+                    {/*</video>*/}
+                {/*</div>*/}
+
 
                 <div className="row">
                     <div className="col s6 center">
@@ -156,8 +204,8 @@ class MainView_vm extends Component {
                                 </td>
                                 <td></td>
 
-
                             </tr>
+
 
 
                         </table>
@@ -169,13 +217,13 @@ class MainView_vm extends Component {
                     <div className="col s6 center">
                     <td></td>
                     <td>
-                        <button id="btnMoveDown" className="btn btn-warning" onClick={this.turnDownCamera}>Zoom In</button> &nbsp;&nbsp;
+                        <button id="btnMoveDown" className="btn btn-warning" onClick={this.zoomInCamera}>Zoom In</button> &nbsp;&nbsp;
                     </td>
                     <td></td>
 
                     <td></td>
                     <td>
-                        <button id="btnMoveDown" className="btn btn-warning" onClick={this.turnDownCamera}>Zoom Out</button> &nbsp;&nbsp;
+                        <button id="btnMoveDown" className="btn btn-warning" onClick={this.zoomOutCamera}>Zoom Out</button> &nbsp;&nbsp;
                     </td>
                     <td></td>
                     </div>
@@ -183,6 +231,7 @@ class MainView_vm extends Component {
                     <div className="col s6 center">
                         <button id="btnRefresh" className="btn btn-success"
                                 onClick={this.recalibrateCamera}>Recalibrate</button>&nbsp;&nbsp;
+                        {/*<button id="btnRefresh" className="btn btn-success">Turn to Audience</button>&nbsp;&nbsp;*/}
                         <button id="btnRefresh" className="btn btn-success">Turn to Audience</button>&nbsp;&nbsp;
                         <button id="btnRefresh" className="btn btn-success">Turn Back to Lecturer</button>&nbsp;&nbsp;
                         <button id="btnClear" className="btn btn-danger" onClick={this.stopMovementCamera}>Stop</button>
@@ -193,12 +242,13 @@ class MainView_vm extends Component {
                     <br/>
                     <br/>
                     <div className="col s6 center">
-                        <button id="btnRefresh" className="btn btn-success">Start Lecturer Tracker</button>&nbsp;&nbsp;
+                        <button id="btnRefresh" className="btn btn-success" onClick={this.runTrackerScript}>Start Lecturer Tracker</button>&nbsp;&nbsp;
                         <button id="btnRefresh" className="btn btn-success">Start Gesture Detection</button>&nbsp;&nbsp;
                         <button id="btnRefresh" className="btn btn-danger">Stop Tracker</button>&nbsp;&nbsp;
-                        <button id="btnClear" className="btn btn-info">Clear</button>
+                        <button id="btnClear" className="btn btn-info">Keypress Camera Move</button>
                     </div>
                 </div>
+
             </div>
         )
     }
