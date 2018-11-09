@@ -29,13 +29,14 @@ class Dashboard_aj extends Component {
                     <Link to={'/userManagement/viewUser/'+userId}>User Management</Link>
                     <Link to={'/bandwidth/'+userId}>Bandwidth Management</Link>
                     <Link to={'/attendanceManagement/'+userId}>Attendance Management</Link>
+                    <Link to={'/courseManagement/viewCourse/'+userId}>Course Management</Link>
                     <a href="#contact">Settings</a></div>);
 
                 return adminDashboard;
 
             case 'lecturer':
                 const lecturerDasboard = (<div className="sidenav">
-                    <a href="#about">Lecturer Dasboard</a>
+                    <a href="#about">Lecturer Dashboard</a>
                     <Link to={'/mainView/' + userId}>Main View</Link>
                     <Link to={'/liveStream/' + userId}>Live Stream</Link>
                     <Link to={'/lectureVideos/' + userId}>Lecture Videos</Link>
@@ -45,7 +46,7 @@ class Dashboard_aj extends Component {
 
             case 'student':
                 const studentDasboard = (<div className="sidenav">
-                    <a href="#about">Student Dasboard</a>
+                    <a href="#about">Student Dashboard</a>
                     <Link to={'/liveStream/' + userId}>Live Stream</Link>
                     {/*<a href="#clients">Attendance</a>*/}
                     <a href="#contact">Settings</a></div>);

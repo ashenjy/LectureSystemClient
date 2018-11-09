@@ -35,3 +35,51 @@ export function stopMovementCamera() {
         .then(res => res.data)
         .catch(error => error);
 }
+
+export function zoomInCamera() {
+    return axios.get('/api/zoomInCamera')
+        .then(res => res.data)
+        .catch(error => error);
+}
+
+export function zoomOutCamera() {
+    return axios.get('/api/zoomOutCamera')
+        .then(res => res.data)
+        .catch(error => error);
+}
+
+export function go_to_podium() {
+    return axios.get('/api/go_to_podium')
+        .then(res => res.data)
+        .catch(error => error);
+}
+
+export function runTrackerScript() {
+    return axios.get('/api/runTrackerScript')
+        .then(res => res.data)
+        .catch(error => error);
+}
+
+export function turn_to_audience() {
+    return axios.get('/api/turn_to_audience')
+        .then(res => res.data)
+        .catch(error => error);
+}
+
+export function startLectureTracker() {
+    return axios.get('/api/startLectureTracker')
+        .then(res => res.data)
+        .catch(error => error);
+}
+
+export function startGestureDetection() {
+    return axios.get('/api/startGestureDetection')
+        .then(res => res.data)
+        .catch(error => error);
+}
+
+export function stopTracker() {
+    return axios.get('/api/stopTracker')
+        .then(res => res.data)
+        .catch(error => error);
+}
