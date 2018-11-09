@@ -12,6 +12,8 @@ class Attendance2 extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            tableUpdateAlert : false,
+            attendanceMarkingAlert: false,
             attendanceError: false,
             redirect: false,
             attendanceDataSet: []        };
@@ -69,8 +71,11 @@ class Attendance2 extends Component {
             });
 
             var data = {
-                attendanceId: attendance._id
+                attendanceId: attendance.original._id
             }
+
+            console.log("Delete DATA:" + attendance.original._id);
+
             fetch("/student/delete", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -105,17 +110,32 @@ class Attendance2 extends Component {
     }
 
     markAttendance() {
+
+        this.setState({
+            attendanceMarkingAlert: true,
+            tableUpdateAlert : false,
+            attendanceError: false
+        });
+
         fetch('/student/markAttendance2')
             .then(response => {
                 if (!response.ok) {
                     console.log("Client().faceRecognize().Error :" + response.statusText);
                     this.setState({
+                        tableUpdateAlert : false,
+                        attendanceMarkingAlert : false,
                         attendanceError: true
                     });
                     throw Error(response.statusText);
                 }
                 console.log("Client().faceRecognize().Success");
                 this.getAllattendance();
+                this.setState({
+                    attendanceMarkingAlert : false,
+                    attendanceError: false,
+                    tableUpdateAlert : true
+
+                });
                 return response.json();
             })
             .then(data => {
@@ -143,7 +163,9 @@ class Attendance2 extends Component {
 
         const { attendanceDataSet } = this.state;
 
-        const faceAlert = (<div className="alert alert-danger" role="alert">Server Error! Please try again!</div>);
+        const faceAlert = (<div className="alert alert-danger" role="alert">Unknown faces! Please try again!</div>);
+        const markingAlert = (<div className="alert alert-success" role="alert">Attendance marking Started..</div>);
+        const tableUpdate = (<div className="alert alert-success" role="alert">Attendance Marked Successfully..Table Updated!</div>);
 
         return (
             <div>
@@ -154,8 +176,11 @@ class Attendance2 extends Component {
 
                         <button onClick={this.markAttendance.bind(this)}
                             className="btn btn-primary btn-lg btn-block" style={{ margin: '0 0 0 15%' }}>Mark Attendance</button>
-
+                        <div style={{ margin: '0 0 0 15%' }}>
                         {this.state.attendanceError === true ? faceAlert : null}
+                        {this.state.attendanceMarkingAlert === true ? markingAlert : null}
+                        {this.state.tableUpdateAlert === true ? tableUpdate : null}
+                        </div>
                     </div>
                     {/* <div className="col-md-6" style={{ margin: '0 0 0 10%' }}>
                         <table id="example" className="table table-striped table-bordered dt-responsive nowrap">

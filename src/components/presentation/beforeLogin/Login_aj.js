@@ -13,6 +13,7 @@ class Login_aj extends Component {
         super();
 
         this.state = {
+            authentication: false,
             faceLoginError: false,
             details: {
             },
@@ -25,7 +26,7 @@ class Login_aj extends Component {
         this.confirmBox.bind(this);
         this.capture.bind(this);
         this.faceLoginButtonClick.bind(this);
-        this.faceRecognize.bind(this);
+        // this.faceRecognize.bind(this);
     }
 
     // componentDidMount() {
@@ -95,11 +96,16 @@ class Login_aj extends Component {
     };
 
     faceLoginButtonClick = () => {
+        this.setState({
+            faceLoginError: false,
+            authentication: true
+        });
         fetch('/user/loginNew')
             .then(response => {
                 if (!response.ok) {
                     console.log("Client().faceRecognize().Error :" + response.statusText);
                     this.setState({
+                        authentication : false,
                         faceLoginError: true
                     });
                     throw Error(response.statusText);
@@ -119,58 +125,43 @@ class Login_aj extends Component {
             .catch((e) => console.log(e));
     }
 
-    faceRecognize(base64) {
-        fetch('/user/faceLogin', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(base64),
-            mode: 'cors'
-        }).then(response => {
-            if (!response.ok) {
-                console.log("Client().faceRecognize().Error :" + response.statusText);
-                this.setState({
-                    faceLoginError: true
-                });
-                throw Error(response.statusText);
-            }
-            console.log("Client().faceRecognize().Success");
-            return response.json();
-        })
-            .then(data => {
-                sessionStorage.setItem('username', data.data.username);
-                sessionStorage.setItem('token', data.data.tokenID);
-                console.log("submitLogin().usertype : " + data.data.usertype);
-                sessionStorage.setItem('usertype', data.data.usertype);
-                sessionStorage.setItem('userid', data.data.userid);
-                this.props.dispatch(userLoggedIn(data.data.username, data.data.usertype));
+    // faceRecognize(base64) {
+    //     fetch('/user/faceLogin', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(base64),
+    //         mode: 'cors'
+    //     }).then(response => {
+    //         if (!response.ok) {
+    //             console.log("Client().faceRecognize().Error :" + response.statusText);
+    //             this.setState({
+    //                 faceLoginError: true
+    //             });
+    //             throw Error(response.statusText);
+    //         }
+    //         console.log("Client().faceRecognize().Success");
+    //         return response.json();
+    //     })
+    //         .then(data => {
+    //             sessionStorage.setItem('username', data.data.username);
+    //             sessionStorage.setItem('token', data.data.tokenID);
+    //             console.log("submitLogin().usertype : " + data.data.usertype);
+    //             sessionStorage.setItem('usertype', data.data.usertype);
+    //             sessionStorage.setItem('userid', data.data.userid);
+    //             this.props.dispatch(userLoggedIn(data.data.username, data.data.usertype));
 
-            })
-            .catch((e) => console.log(e));
-    }
+    //         })
+    //         .catch((e) => console.log(e));
+    // }
 
 
     render() {
         const faceAlert = (<div className="alert alert-danger" role="alert">Face not recognized! Please try again!</div>);
-        // const webcamCode = (
-        //     <div className="webcam">
-        //         <Webcam
-        //             audio={false}
-        //             height={350}
-        //             ref={this.setRef}
-        //             screenshotFormat="image/jpeg"
-        //             width={400}
-        //         />
-
-        //         <button onClick={this.capture}
-        //             className="btn btn-primary btn-lg btn-block">Face Login</button>
-
-        //         {this.state.faceLoginError === true ? faceAlert : null}
-
-        //     </div>
-        // );
+       
+        const AuthenticatingAlert = (<div className="alert alert-success" role="alert">Authenticating...Please wait...</div>);
 
         return (
             <div>
@@ -181,7 +172,10 @@ class Login_aj extends Component {
                         <img src="http://localhost:5004/video_feed" width="490" height="350"></img>
                         <button onClick={this.faceLoginButtonClick}
                             className="btn btn-primary btn-lg btn-block">Face Login</button>
+                        <div style={{ margin: '0 0 0 15%' }}>
                         {this.state.faceLoginError === true ? faceAlert : null}
+                        {this.state.authentication === true ? AuthenticatingAlert : null}
+                        </div>
                     </div>
                 </div>
 
