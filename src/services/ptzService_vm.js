@@ -48,6 +48,12 @@ export function zoomOutCamera() {
         .catch(error => error);
 }
 
+export function go_to_podium() {
+    return axios.get('/api/go_to_podium')
+        .then(res => res.data)
+        .catch(error => error);
+}
+
 export function runTrackerScript() {
     return axios.get('/api/runTrackerScript')
         .then(res => res.data)

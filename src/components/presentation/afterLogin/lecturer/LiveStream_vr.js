@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
+import Iframe from 'react-iframe'
+// Import css stylesheet
+import './../../../../css/style.css';
 
 class LiveStream_vr extends Component {
 
@@ -7,9 +10,29 @@ class LiveStream_vr extends Component {
         super(props);
         this.state = {
             redirect:false
+            // videoSrc: ''
         };
 
     }
+
+    /*componentDidMount(){
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+        if (navigator.getUserMedia) {
+            navigator.getUserMedia({video: true}, this.handleVideo, this.videoError);
+        }
+    }*/
+/*
+
+    handleVideo (stream) {
+        // Update the state, triggering the component to re-render with the correct stream
+        // this.setState({ videoSrc: window.URL.createObjectURL("rtsp://192.168.1.110:554/1/h264major") });
+    }
+
+    videoError()
+    {
+        console.log('error');
+    }
+*/
 
     componentWillMount() {
         if (sessionStorage.getItem("userid")) {
@@ -31,10 +54,11 @@ class LiveStream_vr extends Component {
                 <div className="row">
                     <div className="col-xs-2"></div>
                     <div className="col-xs-8">
-                        <h1> Live Stream</h1>
+                        <h1> Screen Share Stream</h1>
                     </div>
                     <div className="col-xs-2">
                         <h4> Logged in students</h4>
+                        <h6>VimukthiM</h6>
                     </div>
                 </div>
 
@@ -42,37 +66,43 @@ class LiveStream_vr extends Component {
                     <div className="col-xs-1"></div>
 
                     <div className="col-xs-8">
-                        <video width="800" height="400" controls autoPlay>
-                            <source src={process.env.PUBLIC_URL + '/videos/testVideo.mp4'}/>
+
+                        <Iframe url="https://webrtcweb.com/screen/?s=lcs_18_072"
+                                width="921.6"
+                                height="518.4"
+                                id="myId"
+                                className="myClassname"
+                                display="initial"
+                                position="relative"
+                                allowFullScreen/>
+
+
+                        {/*<video width="800" height="400" controls autoPlay>
+                            <source src="rtsp://192.168.1.110:554/1/h264major"/>
                             Your browser does not support HTML5 video.
 
-                        </video>
+                        </video>*/}
+                        {/*<video width="800" height="400" autoPlay>*/}
+                            {/*<source src={process.env.PUBLIC_URL + '/videos/222.mp4'}/>*/}
+                            {/*Your browser does not support HTML5 video.*/}
+
+                        {/*</video>*/}
                     </div>
 
-                    <div className="col-xs-3">
-                        <ul className="list-group">
-                            <li className="list-group-item">Jack Robinson <span className="glyphicon glyphicon-ok"></span></li>
-                            <li className="list-group-item">Joey Tribiani <span className="glyphicon glyphicon-ok"></span></li>
-                            <li className="list-group-item">Rachel Greene <span className="glyphicon glyphicon-ok"></span></li>
-                            <li className="list-group-item">Tim Johnson <span className="glyphicon glyphicon-ok"></span></li>
-                            <li className="list-group-item">Tom Cruise <span className="glyphicon glyphicon-ok"></span></li>
-                            <li className="list-group-item">Megan Fox <span className="glyphicon glyphicon-ok"></span></li>
-                        </ul>
-                    </div>
                 </div>
 
                 <br/>
 
-                <div className="row">
-                    <div className="col-xs-3"></div>
-                    <div className="col-xs-3">
-                        <button type="button" className="btn btn-primary">Rotate Camera</button>
-                    </div>
-                    <div className="col-xs-2">
-                        <h4> </h4>
-                    </div>
+                {/*<div className="row">*/}
+                    {/*<div className="col-xs-3"></div>*/}
+                    {/*<div className="col-xs-3">*/}
+                        {/*<button type="button" className="btn btn-primary">Rotate Camera</button>*/}
+                    {/*</div>*/}
+                    {/*<div className="col-xs-2">*/}
+                        {/*<h4> </h4>*/}
+                    {/*</div>*/}
 
-                </div>
+                {/*</div>*/}
             </div>
         )
     }

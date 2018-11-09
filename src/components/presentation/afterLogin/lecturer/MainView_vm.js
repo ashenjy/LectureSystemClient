@@ -4,7 +4,7 @@ import {Redirect} from 'react-router-dom';
 
 // Import services
 import {recalibrateCamera, turnDownCamera, turnRightCamera, turnUpCamera} from "../../../../services/ptzService_vm";
-import { turnLeftCamera } from "../../../../services/ptzService_vm";
+import { turnLeftCamera, go_to_podium } from "../../../../services/ptzService_vm";
 import { stopMovementCamera } from "../../../../services/ptzService_vm";
 import { zoomInCamera, zoomOutCamera, turn_to_audience } from "../../../../services/ptzService_vm";
 import { runTrackerScript, startLectureTracker,stopTracker, startGestureDetection } from "../../../../services/ptzService_vm";
@@ -29,6 +29,21 @@ class MainView_vm extends Component {
 
     recalibrateCamera() {
         recalibrateCamera().then(data=> {
+            //console.log('done');
+            //console.log(data);
+            if(data.success === true)
+            {
+                alert("Success");
+            }
+            else
+            {
+                //alert("Failed");
+            }
+        })
+    }
+
+    go_to_podium() {
+        go_to_podium().then(data=> {
             //console.log('done');
             //console.log(data);
             if(data.success === true)
@@ -285,6 +300,7 @@ class MainView_vm extends Component {
                                 onClick={this.recalibrateCamera}>Recalibrate</button>&nbsp;&nbsp;
                         <button id="btnRefresh" className="btn btn-success" onClick={this.turn_to_audience}>Turn to Audience</button>&nbsp;&nbsp;
                         <button id="btnRefresh" className="btn btn-success" onClick={this.recalibrateCamera}>Turn Back to Lecturer</button>&nbsp;&nbsp;
+                        <button id="btnRefresh" className="btn btn-info" onClick={this.go_to_podium}>Go To Podium</button>&nbsp;&nbsp;
                         <button id="btnClear" className="btn btn-danger" onClick={this.stopMovementCamera}>Stop</button>
                     </div>
 
