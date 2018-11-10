@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../../../../css/dashboard.css';
 import openSocket from 'socket.io-client';
+import {config} from '../../../../configurations/config';
 
 class adminDashboard extends Component {
 
@@ -16,7 +17,7 @@ class adminDashboard extends Component {
         };
     }
 
-    socket = openSocket('http://127.0.0.1:5000');
+    socket = openSocket(config.apiUrl);
     componentDidMount() {
         // const socket = openSocket('http://127.0.0.1:5000');
         // setInterval(() => {

@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 // Import React Table
 import ReactTable from "react-table";
 import "../../../../../node_modules/react-table/react-table.css";
+import {config} from '../../../../configurations/config';
 
 class Attendance2 extends Component {
 
@@ -172,7 +173,8 @@ class Attendance2 extends Component {
                 {/* <h3>Mark Attendance</h3> */}
                 <div className="row">
                     <div className="col-md-4">
-                        <img src="http://localhost:5004/video_feed" width="500" height="300" ></img>
+                        {/*<img src="http://localhost:5004/video_feed" width="500" height="300" ></img>*/}
+                        <img src={config.pythonServerUrl} width="500" height="300" ></img>
 
                         <button onClick={this.markAttendance.bind(this)}
                             className="btn btn-primary btn-lg btn-block" style={{ margin: '0 0 0 15%' }}>Mark Attendance</button>

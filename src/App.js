@@ -25,10 +25,11 @@ import Bandwidth from './components/presentation/afterLogin/admin/Bandwidth';
 import CourseManagement from './components/presentation/afterLogin/admin/CourseManagement_vm';
 import addCourse_vm from "./components/presentation/afterLogin/admin/addCourse_vm";
 import viewCourse_vm from "./components/presentation/afterLogin/admin/viewCourses_vm";
+import {config} from "./configurations/config";
 
 class App extends Component {
 
-    socket = openSocket('http://127.0.0.1:5000');
+    socket = openSocket(config.apiUrl);
     componentDidMount() {
         // const socket = openSocket('http://127.0.0.1:5000');
 

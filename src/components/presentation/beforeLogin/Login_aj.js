@@ -6,6 +6,7 @@ import '../../../css/loginForm_aj.css';
 import avatar from '../../../css/images/avatar.png';
 import Webcam from 'react-webcam';
 import { isNull } from 'util';
+import {config} from '../../../configurations/config';
 
 class Login_aj extends Component {
 
@@ -169,7 +170,8 @@ class Login_aj extends Component {
                 <div className="col-md-4">
                     {/* {this.state.allowWebcam === true ? webcamCode : null} */}
                     <div className="webcam">
-                        <img src="http://localhost:5004/video_feed" width="490" height="350"></img>
+                        {/*<img src="http://localhost:5004/video_feed" width="490" height="350"></img>*/}
+                        <img src={config.pythonServerUrl} width="490" height="350"></img>
                         <button onClick={this.faceLoginButtonClick}
                             className="btn btn-primary btn-lg btn-block">Face Login</button>
                         <div style={{ margin: '0 0 0 15%' }}>
