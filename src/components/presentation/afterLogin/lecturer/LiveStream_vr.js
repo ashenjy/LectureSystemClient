@@ -3,6 +3,7 @@ import {Redirect} from 'react-router-dom';
 import Iframe from 'react-iframe'
 // Import css stylesheet
 import './../../../../css/style.css';
+import {config} from './../../../../configurations/config';
 
 class LiveStream_vr extends Component {
 
@@ -54,11 +55,41 @@ class LiveStream_vr extends Component {
                 <div className="row">
                     <div className="col-xs-2"></div>
                     <div className="col-xs-8">
-                        <h1> Screen Share Stream</h1>
+
                     </div>
                     <div className="col-xs-2">
                         <h4> Logged in students</h4>
                         <h6>VimukthiM</h6>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-xs-1"></div>
+
+                    <div className="col-xs-11">
+
+                        <Iframe url={config.kurentoUrl}
+                                width="1000"
+                                height="518.4"
+                                id="myId"
+                                className="myClassname"
+                                display="initial"
+                                position="relative"
+                                allowFullScreen/>
+
+                    </div>
+                </div>
+
+                <br/> <br/>
+
+
+                <div className="row">
+                    <div className="col-xs-2"></div>
+                    <div className="col-xs-8">
+                        <h1> Screen Share Stream</h1>
+                    </div>
+                    <div className="col-xs-2">
+
                     </div>
                 </div>
 
