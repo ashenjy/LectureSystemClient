@@ -45,6 +45,7 @@ class addCourse_vm extends Component {
             userTypeFound = true;
         }
         this.props.dispatch(addNewCourse(this.state.details,imageNames,userTypeFound));
+        //return <Redirect to='/viewCourse' />
 
     }
 

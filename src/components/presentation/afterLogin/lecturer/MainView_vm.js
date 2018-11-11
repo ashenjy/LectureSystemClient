@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import {Redirect} from 'react-router-dom';
+import Iframe from 'react-iframe'
 
 // Import services
 import {recalibrateCamera, turnDownCamera, turnRightCamera, turnUpCamera} from "../../../../services/ptzService_vm";
@@ -8,6 +9,7 @@ import { turnLeftCamera, go_to_podium } from "../../../../services/ptzService_vm
 import { stopMovementCamera } from "../../../../services/ptzService_vm";
 import { zoomInCamera, zoomOutCamera, turn_to_audience } from "../../../../services/ptzService_vm";
 import { runTrackerScript, startLectureTracker,stopTracker, startGestureDetection } from "../../../../services/ptzService_vm";
+import {config} from "../../../../configurations/config";
 class MainView_vm extends Component {
 
     constructor(props){
@@ -15,7 +17,6 @@ class MainView_vm extends Component {
         this.state = {
             redirect:false
         };
-
     }
 
     componentWillMount() {
@@ -29,16 +30,16 @@ class MainView_vm extends Component {
 
     recalibrateCamera() {
         recalibrateCamera().then(data=> {
-            //console.log('done');
-            //console.log(data);
-            if(data.success === true)
+            console.log('done');
+            console.log(data);
+            /*if(data.success === true)
             {
                 alert("Success");
             }
             else
             {
                 //alert("Failed");
-            }
+            }*/
         })
     }
 
@@ -61,14 +62,14 @@ class MainView_vm extends Component {
         turnLeftCamera().then(data=> {
             //console.log('done');
             //console.log(data);
-            if(data.success === true)
+            /*if(data.success === true)
             {
                 alert("Success");
             }
             else
             {
                 //alert("Failed");
-            }
+            }*/
         })
     }
 
@@ -246,11 +247,30 @@ class MainView_vm extends Component {
 
                 <div className="row">
                     <div className="col s6 center">
+
+                        <div className="row">
+                            <div className="col-xs-1"></div>
+
+                            <div className="col-xs-11">
+
+                                <Iframe url={config.kurentoUrl}
+                                        width="700"
+                                        height="250"
+                                        id="myId"
+                                        className="myClassname"
+                                        display="initial"
+                                        position="relative"
+                                        allowFullScreen/>
+
+                            </div>
+                        </div>
+
+
                         <table className="table-move">
                             <tr>
                                 <td></td>
                                 <td>
-                                  <button id="btnMoveUp" className="btn btn-primary" onClick={this.turnUpCamera}>  Up</button>
+                                  <button id="btnMoveUp" className="btn btn-primary" onClick={this.turnUpCamera}>  Up   </button>
                                 </td>
                                 <td></td>
                             </tr>
@@ -313,6 +333,7 @@ class MainView_vm extends Component {
                         <button id="btnClear" className="btn btn-info" onClick={this.runTrackerScript}>Keypress Camera Move</button>
                     </div>
                 </div>
+
 
             </div>
         )
