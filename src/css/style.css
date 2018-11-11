@@ -1,3 +1,4 @@
+/*
 tml,body {
 	font-family: "游ゴシック", YuGothic, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", sans-serif;
 	width: 100%;
@@ -10,7 +11,7 @@ h1 {
 #main-wrapper {
 	margin-top: 5em;
 }
-/*
+!*
 #device {
 	width: 20em;
 }
@@ -20,7 +21,7 @@ h1 {
 #pass {
 	width: 8em;
 }
-*/
+*!
 #connected-device {
 	position: relative;
 	background-color: #000000;
@@ -130,3 +131,4 @@ h1 {
 #connected-device div.ptz-zom-ctl-box:hover {
 	opacity: 0.6;
 }
+*/
