@@ -100,8 +100,47 @@ class LectureVideos_lt extends Component{
 
                                 <td>{ video.dateTime.substring(4, 24) }</td>
 
+                                {/*{(() => {
+                                    switch (video.status) {
+                                        case "unprocessed":
+                                            return <td>
+                                             <button type="button" className="btn btn-primary" onClick={() => this.createVideoChapters(video.lectureVideo)}>
+                                                 Create Chapters
+                                             </button>
+                                            </td>;
+                                        case "processed":
+                                            return <td>
+                                                <Link to={'/videoChapters/:userid?lectureVideo=' + video.lectureVideo} className="btn btn-success">
+                                                    View Chapters
+                                                </Link>
+                                            </td>;
+                                        default:
+                                            return <td></td>;
+                                    }
+                                })()}*/}
+
+                                { video.lectureVideo.substring(0, 4) === 'lcs_'
+                                    ? <td> </td>
+                                    : [
+                                        (video.status === 'unprocessed' ?
+                                                <td>
+                                                    <button type="button" className="btn btn-primary"
+                                                            onClick={() => this.createVideoChapters(video.lectureVideo)}>Create
+                                                        Chapters
+                                                    </button>
+                                                </td>
+                                                :
+                                                <td>
+                                                    <Link to={'/videoChapters/:userid?lectureVideo=' + video.lectureVideo} className="btn btn-success">View
+                                                        Chapters</Link>
+                                                </td>
+                                        )
+
+                                    ]
+                                }
+
                                 {/*Display different buttons depending on processed status*/}
-                                {video.status === 'unprocessed' ?
+                                {/*{video.status === 'unprocessed' ?
                                     <td>
                                         <button type="button" className="btn btn-primary"
                                                 onClick={() => this.createVideoChapters(video.lectureVideo)}>Create
@@ -113,7 +152,7 @@ class LectureVideos_lt extends Component{
                                         <Link to={'/videoChapters/:userid?lectureVideo=' + video.lectureVideo} className="btn btn-success">View
                                             Chapters</Link>
                                     </td>
-                                }
+                                }*/}
 
                                 <td>{ video.status }</td>
                             </tr>

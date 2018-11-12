@@ -37,10 +37,10 @@ class Dashboard_aj extends Component {
 
             case 'lecturer':
                 const lecturerDasboard = (<div className="sidenav">
-                    <a href="#about">Lecturer Dashboard</a>
+                    <Link to={'/lectureVideos/' + userId}>Lecturer Dashboard</Link>
                     <Link to={'/mainView/' + userId}>Main View</Link>
                     <Link to={'/liveStream/' + userId}>Live Stream</Link>
-                    <Link to={'/lectureVideos/' + userId}>Lecture Videos</Link>
+                    {/*<Link to={'/lectureVideos/' + userId}>Lecture Videos</Link>*/}
                     {/*<a href="#contact">Settings</a>*/}
                 </div>);
 
@@ -48,7 +48,7 @@ class Dashboard_aj extends Component {
 
             case 'student':
                 const studentDasboard = (<div className="sidenav">
-                    <a href="#about">Student Dashboard</a>
+                    <Link to={'/lectureVideos/' + userId}>Student Dashboard</Link>
                     <Link to={'/liveStream/' + userId}>Live Stream</Link>
                     {/*<a href="#clients">Attendance</a>*/}
                     {/*<a href="#contact">Settings</a>*/}
