@@ -57,10 +57,10 @@ class LiveStream_vr extends Component {
                     <div className="col-xs-8">
 
                     </div>
-                    <div className="col-xs-2">
-                        <h4> Logged in students</h4>
-                        <h6>VimukthiM</h6>
-                    </div>
+                    {/*<div className="col-xs-2">*/}
+                        {/*<h4> Logged in students</h4>*/}
+                        {/*<h6>VimukthiM</h6>*/}
+                    {/*</div>*/}
                 </div>
 
                 <div className="row">
@@ -84,7 +84,7 @@ class LiveStream_vr extends Component {
 
 
                 <div className="row">
-                    <div className="col-xs-2"></div>
+                    <div className="col-xs-1"></div>
                     <div className="col-xs-8">
                         <h1>Screen Share Stream</h1>
                     </div>
