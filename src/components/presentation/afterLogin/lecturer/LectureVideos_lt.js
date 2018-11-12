@@ -119,7 +119,7 @@ class LectureVideos_lt extends Component{
                                     }
                                 })()}*/}
 
-                                { video.lectureVideo.substring(0, 4) === 'lcs_'
+                                { video.lectureVideo.substring(14, 18) === 'lcs_'
                                     ? <td> </td>
                                     : [
                                         (video.status === 'unprocessed' ?
