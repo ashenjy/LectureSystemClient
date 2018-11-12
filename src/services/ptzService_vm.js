@@ -83,3 +83,9 @@ export function stopTracker() {
         .then(res => res.data)
         .catch(error => error);
 }
+
+export function saveIPStream() {
+    return axios.get('/api/saveIPStream')
+        .then(res => res.data)
+        .catch(error => error);
+}

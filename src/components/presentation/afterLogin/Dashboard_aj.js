@@ -30,7 +30,8 @@ class Dashboard_aj extends Component {
                     <Link to={'/bandwidth/'+userId}>Bandwidth Management</Link>
                     <Link to={'/attendanceManagement/'+userId}>Attendance Management</Link>
                     <Link to={'/courseManagement/viewCourse/'+userId}>Course Management</Link>
-                    <a href="#contact">Settings</a></div>);
+                    {/*<a href="#contact">Settings</a>*/}
+                </div>);
 
                 return adminDashboard;
 
@@ -40,7 +41,8 @@ class Dashboard_aj extends Component {
                     <Link to={'/mainView/' + userId}>Main View</Link>
                     <Link to={'/liveStream/' + userId}>Live Stream</Link>
                     <Link to={'/lectureVideos/' + userId}>Lecture Videos</Link>
-                    <a href="#contact">Settings</a></div>);
+                    {/*<a href="#contact">Settings</a>*/}
+                </div>);
 
                 return lecturerDasboard;
 
@@ -49,7 +51,10 @@ class Dashboard_aj extends Component {
                     <a href="#about">Student Dashboard</a>
                     <Link to={'/liveStream/' + userId}>Live Stream</Link>
                     {/*<a href="#clients">Attendance</a>*/}
-                    <a href="#contact">Settings</a></div>);
+                    {/*<a href="#contact">Settings</a>*/}
+
+                    </div>
+                    );
 
                 return studentDasboard;
         }

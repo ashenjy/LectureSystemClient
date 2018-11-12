@@ -1,7 +1,7 @@
 config.videoSavingPath = 'D:/tmp/';
 config.apiUrl = 'http://localhost:5000';
 config.pythonServerUrl = 'http://localhost:5004/video_feed';
-config.kurentoUrl = 'http://192.168.1.3:8080';
+config.kurentoUrl = 'http://192.168.1.4:8080';
 
 export function config() {
     return config;

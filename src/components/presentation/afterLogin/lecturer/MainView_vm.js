@@ -8,7 +8,7 @@ import {recalibrateCamera, turnDownCamera, turnRightCamera, turnUpCamera} from "
 import { turnLeftCamera, go_to_podium } from "../../../../services/ptzService_vm";
 import { stopMovementCamera } from "../../../../services/ptzService_vm";
 import { zoomInCamera, zoomOutCamera, turn_to_audience } from "../../../../services/ptzService_vm";
-import { runTrackerScript, startLectureTracker,stopTracker, startGestureDetection } from "../../../../services/ptzService_vm";
+import { runTrackerScript, startLectureTracker,stopTracker, startGestureDetection, saveIPStream } from "../../../../services/ptzService_vm";
 import {config} from "../../../../configurations/config";
 class MainView_vm extends Component {
 
@@ -213,6 +213,19 @@ class MainView_vm extends Component {
         })
     }
 
+    saveIPStream() {
+        saveIPStream().then(data=> {
+            if(data.success === true)
+            {
+                //alert("Success");
+            }
+            else
+            {
+                //alert("Failed");
+            }
+        })
+    }
+
 
     runTrackerScript() {
         runTrackerScript().then(data=> {
@@ -330,6 +343,7 @@ class MainView_vm extends Component {
                         <button id="btnRefresh" className="btn btn-success" onClick={this.startLectureTracker}>Start Lecturer Tracker</button>&nbsp;&nbsp;
                         <button id="btnRefresh" className="btn btn-success" onClick={this.startGestureDetection}>Start Gesture Detection</button>&nbsp;&nbsp;
                         <button id="btnRefresh" className="btn btn-danger" onClick={this.stopTracker}>Stop Tracker</button>&nbsp;&nbsp;
+                        <button id="btnRefresh" className="btn btn-info" onClick={this.saveIPStream}>Save Stream</button>&nbsp;&nbsp;
                         <button id="btnClear" className="btn btn-info" onClick={this.runTrackerScript}>Keypress Camera Move</button>
                     </div>
                 </div>
